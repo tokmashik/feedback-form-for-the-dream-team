@@ -15,22 +15,29 @@
         />
       </div>
     </div>
-    <div class="adjectives" v-if="currentAdjectives.length">
+
+    <Transition name="fade-block" mode="out-in">
       <div
-        v-for="item in currentAdjectives"
-        :key="item.code"
-        class="adjective"
-        :class="{ selected: selectedAdjectives.includes(item.code) }"
-        @click="toggleAdjective(item.code)"
+        v-if="currentAdjectives.length"
+        :key="ratingGroupKey"
+        class="adjectives"
       >
-        <div class=".p-base">{{ item.text }}</div>
+        <div
+          v-for="item in currentAdjectives"
+          :key="item.code"
+          class="adjective"
+          :class="{ selected: selectedAdjectives.includes(item.code) }"
+          @click="toggleAdjective(item.code)"
+        >
+          <div class="p-base">{{ item.text }}</div>
+        </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import StarIcon from './StarIcon.vue';
 
   const rating = ref(0);
@@ -57,13 +64,30 @@
 
   const currentAdjectives = ref([]);
 
+  const currentGroup = ref(null);
+
+  const ratingGroupKey = computed(() =>
+    rating.value <= 2 ? 'negative' : 'positive',
+  );
+
   const emit = defineEmits(['update:rating', 'update:adjectives']);
 
   function setRating(value) {
     rating.value = value;
-    currentAdjectives.value =
-      value <= 2 ? arrayOfNegativeAdjectives : arrayOfPositiveAdjectives;
-    selectedAdjectives.value = [];
+
+    const newGroup = value <= 2 ? 'negative' : 'positive';
+
+    if (newGroup !== currentGroup.value) {
+      currentGroup.value = newGroup;
+
+      currentAdjectives.value =
+        newGroup === 'negative'
+          ? arrayOfNegativeAdjectives
+          : arrayOfPositiveAdjectives;
+
+      selectedAdjectives.value = []; // решила добавить сброс выбранных только при смене группы
+    }
+
     emitData();
   }
 
@@ -108,8 +132,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // width: 78px;
-    // height: 38px;
     border-radius: 100px;
     padding: 5px 16px;
     background: var(--color-neutral-300);
@@ -122,6 +144,25 @@
 
   .adjective.selected {
     background: var(--color-neutral-600);
-    color: white;
+  }
+
+  .adjective.selected .p-base {
+    color: #fff;
+    font-weight: 400;
+    line-height: 28px;
+  }
+
+  /* Плавное исчезновение и появление всего блока, потому что иначе слишком резкое появление */
+  .fade-block-enter-active,
+  .fade-block-leave-active {
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .fade-block-enter-from,
+  .fade-block-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
   }
 </style>

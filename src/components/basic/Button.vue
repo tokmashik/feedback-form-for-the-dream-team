@@ -29,7 +29,8 @@
     border: none;
     cursor: pointer;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
+    line-height: 28px;
     transition: all 0.2s;
 
     &.primary {
@@ -52,7 +53,7 @@
     }
 
     &:disabled {
-      background-color: #ccc;
+      background-color: #d2ceff;
       cursor: not-allowed;
     }
   }

@@ -85,9 +85,13 @@
   }
 
   .input-label {
-    // margin-bottom: 6px;
+    margin-bottom: 4px;
     font-size: 14px;
     color: #6f6c90;
+    font-weight: 400;
+    line-height: 20px;
+    justify-content: start;
+    display: flex;
   }
 
   .select-box {
@@ -107,7 +111,9 @@
       color: #a0a3bd;
       font-size: 16px;
     }
-
+    .selected-text::selection {
+      background-color: #b8b2ff; /* фон выделения */
+    }
     .arrow {
       transition: transform 0.25s ease;
     }

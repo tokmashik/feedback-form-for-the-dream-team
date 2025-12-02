@@ -1,7 +1,20 @@
 <template>
   <div class="base-input">
     <label v-if="label" :for="id" class="input-label">{{ label }}</label>
+
+    <textarea
+      v-if="type === 'textarea'"
+      :id="id"
+      :placeholder="placeholder"
+      :rows="3"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+      :disabled="disabled"
+      class="input-field textarea-field"
+    ></textarea>
+
     <input
+      v-else
       :id="id"
       :type="type"
       :placeholder="placeholder"
@@ -34,13 +47,13 @@
   }
 
   .input-label {
+    margin-bottom: 4px;
     justify-content: start;
     display: flex;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
     color: #6f6c90;
-    /* user-select: none; */
   }
 
   .input-field {
@@ -51,6 +64,8 @@
     font-size: 1rem;
     outline: none;
     transition: border 0.2s ease;
+    resize: none;
+    color: #170f49;
   }
 
   .input-field:focus {
@@ -59,5 +74,18 @@
 
   .input-field::placeholder {
     color: #a0a3bd;
+  }
+
+  textarea {
+    color: #170f49;
+    font-size: 16px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .textarea-field {
+    min-height: 80px;
+  }
+  input::selection,
+  textarea::selection {
+    background-color: #b8b2ff;
   }
 </style>

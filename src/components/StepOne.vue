@@ -7,7 +7,7 @@
         v-model:adjectives="userAdjectives"
       />
     </div>
-    <div style="gap: 28px; display: flex">
+    <div style="gap: 28px; display: flex; margin-top: 36px">
       <BaseInput v-model="name" label="ФИО" placeholder="Иван Иванов" />
       <BaseInput
         v-model="email"
@@ -32,13 +32,16 @@
     </div>
     <BaseInput
       v-model="phone"
-      type="textaria"
+      type="textarea"
       label="Дополнительная информация"
       placeholder="Что понравилось и не понравилось"
     />
+
     <div style="gap: 28px; display: flex">
       <BaseButton type="secondary" @click="resetForm">Отменить</BaseButton>
-      <BaseButton type="primary" @click="submitForm">Отправить</BaseButton>
+      <BaseButton :disabled="true" type="primary" @click="submitForm"
+        >Отправить</BaseButton
+      >
     </div>
   </form>
 </template>
@@ -65,9 +68,10 @@
 
   const selectOptions = [
     { value: '', label: 'Выберите' },
-    { value: '1', label: 'Опция 1' },
-    { value: '2', label: 'Опция 2' },
-    { value: '3', label: 'Опция 3' },
+    { value: 'junior', label: 'Junior' },
+    { value: 'middle', label: 'Middle' },
+    { value: 'senior', label: 'Senior' },
+    { value: 'team_lead', label: 'Tean Lead' },
   ];
 
   const resetForm = () => {
@@ -80,8 +84,6 @@
   .form {
     background-color: var(--color-neutral-100);
     gap: 36px;
-    // display: flex;
-    // justify-content: center;
     border-radius: 32px;
     padding: 44px;
   }
