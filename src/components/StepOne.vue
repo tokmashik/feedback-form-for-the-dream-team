@@ -2,7 +2,10 @@
   <form class="form" @submit.prevent="submitForm">
     <div>
       <h2>Форма обратной связи</h2>
-      <RatingStars />
+      <RatingStars
+        v-model:rating="userRating"
+        v-model:adjectives="userAdjectives"
+      />
     </div>
     <div style="gap: 28px; display: flex">
       <BaseInput v-model="name" label="Имя" placeholder="Введите имя" />
@@ -38,6 +41,9 @@
   const name = ref('');
   const email = ref('');
   const selectedOption = ref('');
+  const userRating = ref(0)
+  const userAdjectives = ref([])
+
   // const router = useRouter()
   const submitForm = () => {
     // alert(`Имя: ${name.value}, Email: ${email.value}`)
