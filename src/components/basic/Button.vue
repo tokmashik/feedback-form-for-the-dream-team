@@ -10,15 +10,15 @@
 </template>
 
 <script setup>
-defineProps({
-  type: { type: String, default: 'primary' }, // primary / secondary / custom
-  disabled: { type: Boolean, default: false }
-});
+  defineProps({
+    type: { type: String, default: 'primary' }, // primary / secondary / custom
+    disabled: { type: Boolean, default: false },
+  });
 
-defineEmits(['click']);
+  defineEmits(['click']);
 </script>
 
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
   .basic-button {
     width: 260.5px;
     height: 56px;
@@ -43,8 +43,8 @@ defineEmits(['click']);
 
     &.secondary {
       background-color: #fff;
-      color: #4A3AFF;
-      border: 1px solid #4A3AFF;
+      color: #4a3aff;
+      border: 1px solid #4a3aff;
 
       &:hover:not(:disabled) {
         background-color: #f3f2ff;
@@ -56,4 +56,4 @@ defineEmits(['click']);
       cursor: not-allowed;
     }
   }
-  </style>
+</style>

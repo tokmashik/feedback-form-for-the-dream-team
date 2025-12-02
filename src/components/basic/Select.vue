@@ -10,7 +10,11 @@
       @focus="isFocused = true"
       @blur="isFocused = false"
     >
-      <option v-for="option in options" :key="option.value" :value="option.value">
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+      >
         {{ option.label }}
       </option>
     </select>
@@ -18,30 +22,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+  import { ref } from 'vue';
 
-const isFocused = ref(false);
+  const isFocused = ref(false);
 
-defineProps({
-  modelValue: { type: [String, Number], default: '' },
-  label: { type: String, default: '' },
-  id: { type: String, default: '' },
-  disabled: { type: Boolean, default: false },
-  options: {
-    type: Array,
-    default: () => [
-      { value: '', label: 'Выберите' },
-      { value: '1', label: 'Опция 1' },
-      { value: '2', label: 'Опция 2' },
-      { value: '3', label: 'Опция 3' }
-    ]
-  }
-});
+  defineProps({
+    modelValue: { type: [String, Number], default: '' },
+    label: { type: String, default: '' },
+    id: { type: String, default: '' },
+    disabled: { type: Boolean, default: false },
+    options: {
+      type: Array,
+      default: () => [
+        { value: '', label: 'Выберите' },
+        { value: '1', label: 'Опция 1' },
+        { value: '2', label: 'Опция 2' },
+        { value: '3', label: 'Опция 3' },
+      ],
+    },
+  });
 
-defineEmits(['update:modelValue']);
+  defineEmits(['update:modelValue']);
 </script>
 
-  <style scoped>
+<style scoped>
   .base-select {
     display: flex;
     flex-direction: column;
@@ -67,7 +71,7 @@ defineEmits(['update:modelValue']);
   }
 
   .select-field:focus {
-    border: 1px solid #4A3AFF;
+    border: 1px solid #4a3aff;
     background: var(--color-neutral-200);
   }
-  </style>
+</style>
