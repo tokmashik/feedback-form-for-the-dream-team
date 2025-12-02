@@ -1,27 +1,27 @@
 <template>
   <form
-  class="form"
-  @submit.prevent="submitForm">
+    class="form"
+    @submit.prevent="submitForm">
     <div>
       <h2>Спасибо, ваш ответ отправлен</h2>
       <div class="p-small">Свяжемся с вами в ближайшее время</div>
 
       <BasicIcon
-      name="success" 
-      width="157"
-      height="143"
-      color="#fff"
+        name="success"
+        width="157"
+        height="143"
+        color="#fff"
       />
     </div>
   </form>
 </template>
 
 <script setup>
-import BasicIcon from './basic/BasicIcon.vue'
+import BasicIcon from './basic/BasicIcon.vue';
 
 const submitForm = () => {
-  console.log('Форма отправлена')
-}
+  console.log('Форма отправлена');
+};
 </script>
 <style lang="scss">
 .form {

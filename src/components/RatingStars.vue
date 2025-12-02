@@ -1,9 +1,8 @@
 <template>
-  
-    <div class="p-small">
-      Пожалуйста, оцените свой опыт прохождения тестового
-    </div>
-    <div class="rating-wrapper">
+  <div class="p-small">
+    Пожалуйста, оцените свой опыт прохождения тестового
+  </div>
+  <div class="rating-wrapper">
     <div class="stars">
       <StarIcon
         v-for="index in 5"
@@ -18,14 +17,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import StarIcon from './StarIcon.vue'
+import { ref } from 'vue';
+import StarIcon from './StarIcon.vue';
 
-const rating = ref(0)          // выбранное количество звезд
-const hoverRating = ref(0)     // подсветка при наведении
+const rating = ref(0);          // выбранное количество звезд
+const hoverRating = ref(0);     // подсветка при наведении
 
 function setRating(value) {
-  rating.value = value
+  rating.value = value;
 }
 </script>
 

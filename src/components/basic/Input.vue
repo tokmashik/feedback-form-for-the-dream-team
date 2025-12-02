@@ -21,9 +21,9 @@ defineProps({
   label: { type: String, default: '' },
   id: { type: String, default: '' },
   disabled: { type: Boolean, default: false }
-})
+});
 
-defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue']);
 </script>
 
 <style scoped>

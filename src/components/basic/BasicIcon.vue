@@ -10,5 +10,5 @@ defineProps({
   width: { type: [Number, String], default: 24 },
   height: { type: [Number, String], default: 24 },
   color: { type: String, default: '#000' },
-})
+});
 </script>
