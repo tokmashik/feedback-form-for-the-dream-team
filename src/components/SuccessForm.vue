@@ -1,17 +1,25 @@
 <template>
-  <form class="form" @submit.prevent="submitForm">
-    <div>
-      <h2>Спасибо, ваш ответ отправлен</h2>
-      <div class="p-small">Свяжемся с вами в ближайшее время</div>
+  <form class="success-form" @submit.prevent="submitForm">
+    <div class="success-form__content">
+      <div>
+        <h2 class="success-form__title">Спасибо, ваш ответ отправлен</h2>
+        <div class="success-form__subtitle">
+          Свяжемся с вами в ближайшее время
+        </div>
+      </div>
 
       <BasicIcon
+        class="success-form__icon"
         name="success"
         width="157"
         height="143"
         color="var(--color-neutral-100)"
       />
     </div>
-    <BaseButton type="primary" @click="submitForm">На главную</BaseButton>
+
+    <BaseButton class="success-form__button" type="primary" @click="submitForm">
+      На главную
+    </BaseButton>
   </form>
 </template>
 
@@ -26,3 +34,42 @@
     emit('close');
   };
 </script>
+
+<style scoped lang="scss">
+  .success-form {
+    display: flex;
+    flex-direction: column;
+    gap: 95px;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 95px;
+    }
+
+    &__title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #170f49;
+      text-align: center;
+      margin: 0 0 8px 0;
+    }
+
+    &__subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: #6f6c90;
+      text-align: center;
+    }
+
+    &__icon {
+      display: block;
+    }
+
+    &__button {
+      align-self: center;
+      width: 200px;
+    }
+  }
+</style>
