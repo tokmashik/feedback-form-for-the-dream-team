@@ -1,4 +1,6 @@
 <template>
+  <SvgIcon name="error" width="44" height="44" color="#4A3AFF" />
+
   <StepOne />
   <ErrorScreen />
   <SuccessScreen />
