@@ -32,6 +32,6 @@ export function useModal() {
     closeFeedback,
     openSuccess,
     closeSuccess,
-    submitFeedback
+    submitFeedback,
   };
 }

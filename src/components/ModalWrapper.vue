@@ -1,12 +1,12 @@
 <template>
-    <div class="modal-backdrop">
-      <div class="modal-content">
-        <slot></slot>
-      </div>
+  <div class="modal-backdrop">
+    <div class="modal-content">
+      <slot></slot>
     </div>
-  </template>
-  
-  <style scoped>
+  </div>
+</template>
+
+<style scoped>
   .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -16,7 +16,7 @@
     justify-content: center;
     /* z-index: 1000; */
   }
-  
+
   .modal-content {
     max-width: 500px;
     width: 100%;
@@ -25,5 +25,4 @@
     border-radius: 32px;
     padding: 44px;
   }
-  </style>
-  
+</style>

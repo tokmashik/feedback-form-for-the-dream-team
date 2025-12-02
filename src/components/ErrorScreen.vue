@@ -4,12 +4,7 @@
       <h2>Что-то пошло не так</h2>
       <div class="p-small">Попробуйте заполнить форму позже</div>
 
-      <BasicIcon
-        name="error"
-        width="157"
-        height="143"
-        color="white"
-      />
+      <BasicIcon name="error" width="157" height="143" color="white" />
     </div>
     <div style="gap: 28px; display: flex">
       <BaseButton type="secondary" @click="resetForm">Закрыть</BaseButton>
