@@ -20,7 +20,7 @@
     <!-- Dropdown list -->
     <div v-if="isOpen" class="dropdown">
       <div
-        v-for="option in options"
+        v-for="option in filteredOptions"
         :key="option.value"
         class="dropdown-item"
         :class="{ selected: option.value === modelValue }"
@@ -63,6 +63,10 @@
     const item = props.options.find((o) => o.value === props.modelValue);
     return item ? item.label : '';
   });
+
+  const filteredOptions = computed(() =>
+    props.options.filter((o) => o.value !== ''),
+  );
 
   const handleClickOutside = (e) => {
     if (selectRef.value && !selectRef.value.contains(e.target)) {

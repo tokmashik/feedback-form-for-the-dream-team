@@ -1,15 +1,17 @@
 <template>
-  <form class="form" @submit.prevent="submitForm">
-    <div>
-      <h2>Форма обратной связи</h2>
+  <form class="feedback-form" @submit.prevent="submitForm">
+    <div class="feedback-form__header">
+      <h2 class="feedback-form__title">Форма обратной связи</h2>
       <RatingStars
+        class="feedback-form__rating"
         v-model:rating="userRating"
         v-model:adjectives="userAdjectives"
       />
     </div>
 
-    <div style="gap: 28px; display: flex; margin-top: 36px">
+    <div class="feedback-form__row">
       <BaseInput
+        class="feedback-form__input"
         v-model="name"
         label="ФИО"
         placeholder="Иван Иванов"
@@ -17,6 +19,7 @@
         :error="errors.name"
       />
       <BaseInput
+        class="feedback-form__input"
         v-model="email"
         label="Почта"
         placeholder="Введите email"
@@ -25,8 +28,9 @@
       />
     </div>
 
-    <div style="gap: 28px; display: flex; margin-top: 28px">
+    <div class="feedback-form__row">
       <BaseInput
+        class="feedback-form__input"
         v-model="phone"
         type="phone"
         label="Номер телефона"
@@ -35,6 +39,7 @@
         :error="errors.phone"
       />
       <BaseSelect
+        class="feedback-form__select"
         id="experience"
         label="Грейд"
         v-model="selectedOption"
@@ -45,21 +50,34 @@
     </div>
 
     <BaseInput
+      class="feedback-form__textarea"
       v-model="additionalInfo"
       type="textarea"
       label="Дополнительная информация"
       placeholder="Что понравилось и не понравилось"
     />
 
-    <div style="gap: 28px; display: flex; margin-top: 36px">
-      <BaseButton type="secondary" @click="resetForm">Отменить</BaseButton>
-      <BaseButton type="primary" @click="submitForm"> Отправить </BaseButton>
+    <div class="feedback-form__actions">
+      <BaseButton
+        class="feedback-form__button"
+        type="secondary"
+        @click="resetForm"
+      >
+        Отменить
+      </BaseButton>
+      <BaseButton
+        class="feedback-form__button"
+        type="primary"
+        @click="submitForm"
+      >
+        Отправить
+      </BaseButton>
     </div>
   </form>
 </template>
 
 <script setup>
-  import { ref, reactive, computed } from 'vue';
+  import { ref, reactive } from 'vue';
   import BaseButton from './basic/Button.vue';
   import RatingStars from './RatingStars.vue';
   import BaseInput from './basic/Input.vue';
@@ -80,10 +98,8 @@
     selectedOption: '',
   });
 
-  // Функция проверки email
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  // Проверка формы
   const validateForm = () => {
     errors.name = name.value.trim() ? '' : 'ФИО обязательно';
     errors.email = email.value.trim()
@@ -97,7 +113,6 @@
     return !Object.values(errors).some(Boolean);
   };
 
-  // Отправка формы
   const submitForm = () => {
     if (!validateForm()) return;
 
@@ -114,7 +129,6 @@
     alert('Форма успешно отправлена!');
   };
 
-  // Сброс формы
   const resetForm = () => {
     name.value = '';
     email.value = '';
@@ -126,11 +140,6 @@
     Object.keys(errors).forEach((key) => (errors[key] = ''));
   };
 
-  // // Кнопка отправки отключена, если есть пустые поля
-  // const isSubmitDisabled = computed(
-  //   () => !name.value || !email.value || !phone.value || !selectedOption.value,
-  // );
-
   const selectOptions = [
     { value: '', label: 'Выберите' },
     { value: 'junior', label: 'Junior' },
@@ -139,3 +148,50 @@
     { value: 'team_lead', label: 'Team Lead' },
   ];
 </script>
+
+<style scoped lang="scss">
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 800px;
+    margin: 0 auto;
+
+    &__header {
+      gap: 16px;
+    }
+
+    &__rating {
+      align-self: flex-start;
+    }
+
+    &__row {
+      display: flex;
+      gap: 28px;
+      max-width: 549px;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+    }
+
+    &__input,
+    &__select,
+    &__textarea {
+      flex: 1;
+    }
+
+    &__select {
+      width: 260.5px;
+    }
+
+    &__actions {
+      display: flex;
+      gap: 28px;
+    }
+
+    &__button {
+      min-width: 120px;
+    }
+  }
+</style>
