@@ -127,7 +127,7 @@
     &__wrapper {
       display: flex;
       justify-content: center;
-      margin: 20px 0 36px 0;
+      margin: 10px 0 26px 0;
     }
 
     &__stars {
