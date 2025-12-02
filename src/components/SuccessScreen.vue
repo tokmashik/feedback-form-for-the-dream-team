@@ -3,14 +3,16 @@
     <div>
       <h2>Спасибо, ваш ответ отправлен</h2>
       <div class="p-small">Свяжемся с вами в ближайшее время</div>
-
+      
       <BasicIcon name="success" width="157" height="143" color="#fff" />
     </div>
+    <BaseButton type="primary" @click="submitForm">На главную</BaseButton>
   </form>
 </template>
 
 <script setup>
   import BasicIcon from './basic/BasicIcon.vue';
+  import BaseButton from './basic/Button.vue';
 
   const submitForm = () => {
     console.log('Форма отправлена');
