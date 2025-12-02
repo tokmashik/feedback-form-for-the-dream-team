@@ -7,77 +7,134 @@
         v-model:adjectives="userAdjectives"
       />
     </div>
+
     <div style="gap: 28px; display: flex; margin-top: 36px">
-      <BaseInput v-model="name" label="ФИО" placeholder="Иван Иванов" />
+      <BaseInput
+        v-model="name"
+        label="ФИО"
+        placeholder="Иван Иванов"
+        :error="errors.name"
+      />
       <BaseInput
         v-model="email"
-        type="email"
         label="Почта"
         placeholder="Введите email"
+        :error="errors.email"
       />
     </div>
-    <div style="gap: 28px; display: flex">
+
+    <div style="gap: 28px; display: flex; margin-top: 28px">
       <BaseInput
         v-model="phone"
         type="phone"
         label="Номер телефона"
         placeholder="+7 (000) 000 00 00"
+        :error="errors.phone"
       />
+      <!-- {{ selectedOption }} -->
       <BaseSelect
         id="experience"
         label="Грейд"
         v-model="selectedOption"
         :options="selectOptions"
+        :error="errors.selectedOption"
       />
     </div>
+
     <BaseInput
-      v-model="phone"
+      v-model="additionalInfo"
       type="textarea"
       label="Дополнительная информация"
       placeholder="Что понравилось и не понравилось"
     />
 
-    <div style="gap: 28px; display: flex">
+    <div style="gap: 28px; display: flex; margin-top: 36px">
       <BaseButton type="secondary" @click="resetForm">Отменить</BaseButton>
-      <BaseButton :disabled="true" type="primary" @click="submitForm"
-        >Отправить</BaseButton
-      >
+      <BaseButton type="primary" @click="submitForm"> Отправить </BaseButton>
     </div>
   </form>
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+  import { ref, reactive, computed } from 'vue';
   import BaseButton from './basic/Button.vue';
   import RatingStars from './RatingStars.vue';
   import BaseInput from './basic/Input.vue';
   import BaseSelect from './basic/Select.vue';
-  // import { useRouter } from 'vue-router'
 
   const name = ref('');
   const email = ref('');
+  const phone = ref('');
   const selectedOption = ref('');
+  const additionalInfo = ref('');
   const userRating = ref(0);
   const userAdjectives = ref([]);
 
-  // const router = useRouter()
-  const submitForm = () => {
-    // alert(`Имя: ${name.value}, Email: ${email.value}`)
-    // router.push({ name: 'ThankYou' }) // или path: '/thank-you'
+  const errors = reactive({
+    name: '',
+    email: '',
+    phone: '',
+    selectedOption: '',
+  });
+
+  // Функция проверки email
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  // Проверка формы
+  const validateForm = () => {
+    errors.name = name.value.trim() ? '' : 'ФИО обязательно';
+    errors.email = email.value.trim()
+      ? isValidEmail(email.value)
+        ? ''
+        : 'Неверный формат email'
+      : 'Email обязателен';
+    errors.phone = phone.value.trim() ? '' : 'Телефон обязателен';
+    errors.selectedOption = selectedOption ? '' : 'Выберите грейд';
+
+    return !Object.values(errors).some(Boolean);
   };
+
+  // Отправка формы
+  const submitForm = () => {
+    if (!validateForm()) return;
+
+    console.log({
+      name: name.value,
+      email: email.value,
+      phone: phone.value,
+      selectedOption: selectedOption.value,
+      additionalInfo: additionalInfo.value,
+      rating: userRating.value,
+      adjectives: userAdjectives.value,
+    });
+
+    alert('Форма успешно отправлена!');
+  };
+
+  // Сброс формы
+  const resetForm = () => {
+    name.value = '';
+    email.value = '';
+    phone.value = '';
+    selectedOption.value = '';
+    additionalInfo.value = '';
+    userRating.value = 0;
+    userAdjectives.value = [];
+    Object.keys(errors).forEach((key) => (errors[key] = ''));
+  };
+
+  // // Кнопка отправки отключена, если есть пустые поля
+  // const isSubmitDisabled = computed(
+  //   () => !name.value || !email.value || !phone.value || !selectedOption.value,
+  // );
 
   const selectOptions = [
     { value: '', label: 'Выберите' },
     { value: 'junior', label: 'Junior' },
     { value: 'middle', label: 'Middle' },
     { value: 'senior', label: 'Senior' },
-    { value: 'team_lead', label: 'Tean Lead' },
+    { value: 'team_lead', label: 'Team Lead' },
   ];
-
-  const resetForm = () => {
-    name.value = '';
-    email.value = '';
-  };
 </script>
 
 <style lang="scss">

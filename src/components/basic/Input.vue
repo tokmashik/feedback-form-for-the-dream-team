@@ -10,7 +10,7 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       :disabled="disabled"
-      class="input-field textarea-field"
+      :class="['input-field', { 'input-error': error }]"
     ></textarea>
 
     <input
@@ -21,8 +21,10 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       :disabled="disabled"
-      class="input-field"
+      :class="['input-field', { 'input-error': error }]"
     />
+
+    <span v-if="error" class="error-message">{{ error }}</span>
   </div>
 </template>
 
@@ -34,6 +36,7 @@
     label: { type: String, default: '' },
     id: { type: String, default: '' },
     disabled: { type: Boolean, default: false },
+    error: { type: String, default: '' }, // новый проп для ошибки
   });
 
   defineEmits(['update:modelValue']);
@@ -72,10 +75,19 @@
     border: 1px solid #4a3aff;
   }
 
+  .input-field.input-error {
+    border: 1px solid red;
+  }
+
   .input-field::placeholder {
     color: #a0a3bd;
   }
 
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+  }
   textarea {
     color: #170f49;
     font-size: 16px;
