@@ -12,4 +12,9 @@ export default defineConfig({
       svgoOptions: true,
     }),
   ],
-})
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+});
