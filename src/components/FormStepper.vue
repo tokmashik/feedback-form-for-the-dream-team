@@ -64,8 +64,8 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: var(--color-neutral-400);
-      color: #fff;
+      background: var(--color-primary1);
+      color: var(--color-neutral-100);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -74,7 +74,7 @@
       transition: background 0.3s ease;
 
       &--active {
-        background: var(--color-neutral-600);
+        background: var(--color-primary1);
       }
     }
 
@@ -89,7 +89,7 @@
 
       &-progress {
         height: 100%;
-        background: var(--color-neutral-600);
+        background: var(--color-primary1);
         transition: width 0.3s ease;
       }
     }

@@ -58,11 +58,11 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    color: #6f6c90;
+    color: var(--color-neutral-600);
   }
 
   .required-star {
-    color: red;
+    color: var(--color-danger);
     margin-left: 2px;
   }
 
@@ -75,28 +75,28 @@
     outline: none;
     transition: border 0.2s ease;
     resize: none;
-    color: #170f49;
+    color: var(--color-neutral-800);
   }
 
   .input-field:focus {
-    border: 1px solid #4a3aff;
+    border: 1px solid var(--color-primary1);
   }
 
   .input-field.input-error {
-    border: 1px solid red;
+    border: 1px solid var(--color-danger);
   }
 
   .input-field::placeholder {
-    color: #a0a3bd;
+    color: var(--color-neutral-500);
   }
 
   .error-message {
-    color: red;
+    color: var(--color-danger);
     font-size: 12px;
     margin-top: 4px;
   }
   textarea {
-    color: #170f49;
+    color: var(--color-neutral-800);
     font-size: 16px;
     font-family: 'DM Sans', sans-serif;
   }

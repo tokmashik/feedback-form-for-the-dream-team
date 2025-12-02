@@ -121,7 +121,7 @@
 
     &__label {
       font-size: 14px;
-      color: #6f6c90;
+      color: var(--color-neutral-600);
     }
 
     &__wrapper {
@@ -158,7 +158,7 @@
         background: var(--color-neutral-600);
 
         .rating-stars__adjective-text {
-          color: #fff;
+          color: var(--color-neutral-100);
         }
       }
 
@@ -166,7 +166,7 @@
         background: var(--color-neutral-300);
 
         .rating-stars__adjective-text {
-          color: #170f49;
+          color: var(--color-neutral-800);
         }
       }
     }

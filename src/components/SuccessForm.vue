@@ -51,7 +51,7 @@
     &__title {
       font-size: 32px;
       font-weight: 700;
-      color: #170f49;
+      color: var(--color-neutral-800);
       text-align: center;
       margin: 0 0 8px 0;
     }
@@ -59,7 +59,7 @@
     &__subtitle {
       font-size: 16px;
       font-weight: 400;
-      color: #6f6c90;
+      color: var(--color-neutral-600);
       text-align: center;
     }
 

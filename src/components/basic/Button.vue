@@ -38,22 +38,22 @@
       color: var(--color-neutral-100);
 
       &:hover:not(:disabled) {
-        background-color: #6153fd;
+        background-color: var(--color-primary1-disabled);
       }
     }
 
     &.secondary {
       background-color: var(--color-neutral-100);
-      color: #4a3aff;
-      border: 1px solid #4a3aff;
+      color: var(--color-primary1);
+      border: 1px solid var(--color-primary1);
 
       &:hover:not(:disabled) {
-        background-color: #f3f2ff;
+        background-color: var(--color-primary1-hover-disabled);
       }
     }
 
     &:disabled {
-      background-color: #d2ceff;
+      background-color: var(--color-primary1-light);
       cursor: not-allowed;
     }
   }

@@ -102,7 +102,7 @@
     &__label {
       margin-bottom: 4px;
       font-size: 14px;
-      color: #6f6c90;
+      color: var(--color-neutral-600);
       font-weight: 400;
       line-height: 20px;
     }
@@ -120,7 +120,7 @@
       transition: border 0.2s ease;
 
       &.open {
-        border: 1px solid #4a3aff;
+        border: 1px solid var(--color-primary1);
 
         .custom-select__arrow {
           transform: rotate(180deg);
@@ -128,11 +128,11 @@
       }
 
       .custom-select__selected-text {
-        color: #a0a3bd;
+        color: var(--color-neutral-500);
         font-size: 16px;
 
         &--active {
-          color: #170f49;
+          color: var(--color-neutral-800);
         }
       }
 
@@ -143,7 +143,7 @@
 
     &__dropdown {
       margin-top: 8px;
-      background: #ffffff;
+      background: var(--color-neutral-100);
       border-radius: 8px;
       box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
       overflow: hidden;
@@ -156,7 +156,7 @@
       width: 100%;
       height: 44px;
       padding: 12px 16px;
-      background: #ffffff;
+      background: var(--color-neutral-100);
       color: #4e4b66;
       cursor: pointer;
       display: flex;
@@ -165,12 +165,12 @@
       font-size: 16px;
 
       &:hover {
-        background: #f3f4f6;
+        background: var(--color-primary1-hover-disabled);
       }
 
       &.selected {
         background: var(--color-neutral-600);
-        color: #fff;
+        color: var(--color-neutral-100);
       }
     }
   }
