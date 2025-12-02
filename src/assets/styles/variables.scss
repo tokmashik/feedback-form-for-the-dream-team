@@ -1,0 +1,80 @@
+:root {
+    /* Primary */
+    --color-primary1: #4A3AFF;
+  
+    /* Secondary */
+    --color-secondary1: #D9DBE9;
+  
+    /* Neutrals */
+    --color-neutral-800: #170F49;
+    --color-neutral-700: #514F6E;
+    --color-neutral-600: #6F6C90;
+    --color-neutral-500: #A0A3BD;
+    --color-neutral-400: #D9DBE9;
+    --color-neutral-300: #EFF0F6;
+    --color-neutral-200: #F7F7FB;
+    --color-neutral-100: #FFFFFF;
+  
+    /* Semantic */
+    --color-success: #5BC729;
+    --color-success-bg: #EFFBE9;
+    --color-danger: #FD2727;
+    --color-danger-bg: #FDF2F2;
+    --color-warning: #FF9538;
+    --color-warning-bg: #FADEC5;
+
+    /* Star */
+    --color-star-bg: #FFE01A;
+}
+
+    /* Заголовки */
+
+  @mixin heading($size, $line, $weight: 700) {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: $weight;
+    font-size: $size;
+    line-height: $line;
+    letter-spacing: 0;
+    color: var(--color-neutral-800);
+  }
+  
+  h1 { @include heading(50px, 62px, 700); }
+  h2 { @include heading(34px, 46px, 700); }
+  h3 { @include heading(24px, 35px, 700); }
+  h4 { @include heading(22px, 28px, 500); }
+  h5 { @include heading(18px, 24px, 700); }
+  
+    /* Параграфы */
+
+@mixin paragraph($size, $line, $weight: 400, $color: var(--color-neutral-600), $is-link: false) {
+    font-family: 'DM Sans', sans-serif;
+    font-size: $size;
+    line-height: $line;
+    font-weight: $weight;
+    letter-spacing: 0;
+    color: $color;
+  
+    @if $is-link == true {
+      text-decoration: underline;
+      text-decoration-style: solid;
+      text-decoration-thickness: 1px;
+      text-decoration-offset: 2px;
+    }
+  }
+  
+  /* Base */
+  .p-base       { @include paragraph(16px, 28px, 400); }
+  .p-base-bold  { @include paragraph(16px, 28px, 600); }
+  
+  /* Small */
+  .p-small       { @include paragraph(14px, 20px, 400); }
+  .p-small-bold  { @include paragraph(14px, 20px, 600); }
+  
+  /* Mini */
+  .p-mini        { @include paragraph(12px, 16px, 400); }
+  .p-mini-bold   { @include paragraph(12px, 16px, 600); }
+  
+  /* Links */
+  .p-base-link  { @include paragraph(16px, 28px, 400, var(--color-primary1), true); }
+  .p-small-link { @include paragraph(14px, 20px, 400, var(--color-primary1), true); }
+  .p-mini-link  { @include paragraph(12px, 16px, 400, var(--color-primary1), true); }

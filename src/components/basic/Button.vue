@@ -33,8 +33,7 @@
     transition: all 0.2s;
   
     &.primary {
-      background-color: #4A3AFF;
-    //   background-color: var(--color-primary1);
+      background-color: var(--color-primary1);
       color: #fff;
   
       &:hover:not(:disabled) {
@@ -43,11 +42,12 @@
     }
   
     &.secondary {
-      background-color: #6c757d;
-      color: #fff;
+      background-color: #fff;
+      color: #4A3AFF;
+      border: 1px solid #4A3AFF;
   
       &:hover:not(:disabled) {
-        background-color: #5a6268;
+        background-color: #f3f2ff;
       }
     }
   
