@@ -1,10 +1,11 @@
 <template>
   <StepOne />
-  <!-- <CustomCursor /> -->
+  <ErrorScreen />
+  <SuccessScreen />
 </template>
 
 <script setup>
 import StepOne from './components/StepOne.vue'
-// import CustomCursor from './components/CustomCursor.vue'
-import './assets/styles/variables.css';
+import ErrorScreen from './components/ErrorScreen.vue'
+import SuccessScreen from './components/SuccessScreen.vue'
 </script>
