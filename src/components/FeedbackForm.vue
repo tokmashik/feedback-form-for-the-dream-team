@@ -139,12 +139,3 @@
     { value: 'team_lead', label: 'Team Lead' },
   ];
 </script>
-
-<!-- <style lang="scss">
-  .form {
-    background-color: var(--color-neutral-100);
-    gap: 36px;
-    border-radius: 32px;
-    padding: 44px;
-  }
-</style> -->
