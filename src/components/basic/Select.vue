@@ -145,12 +145,11 @@
     background: #ffffff;
     color: #4e4b66;
     cursor: pointer;
-    font-size: 14px;
     display: flex;
     align-items: center;
     transition: background 0.15s ease;
     gap: 8px;
-    font-size: 14px;
+    font-size: 16px;
 
     &:hover {
       background: #f3f4f6;

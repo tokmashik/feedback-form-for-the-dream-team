@@ -49,7 +49,6 @@
   .base-input {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1rem;
   }
 
   .input-label {
