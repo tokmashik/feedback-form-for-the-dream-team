@@ -1,6 +1,8 @@
 <template>
   <div class="base-input">
-    <label v-if="label" :for="id" class="input-label">{{ label }}</label>
+    <label v-if="label" :for="id" class="input-label">
+      {{ label }}<span v-if="required" class="required-star">*</span>
+    </label>
 
     <textarea
       v-if="type === 'textarea'"
@@ -36,7 +38,8 @@
     label: { type: String, default: '' },
     id: { type: String, default: '' },
     disabled: { type: Boolean, default: false },
-    error: { type: String, default: '' }, // новый проп для ошибки
+    error: { type: String, default: '' },
+    required: { type: Boolean, default: false }, // новый проп
   });
 
   defineEmits(['update:modelValue']);
@@ -57,6 +60,11 @@
     font-size: 14px;
     line-height: 20px;
     color: #6f6c90;
+  }
+
+  .required-star {
+    color: red;
+    margin-left: 2px;
   }
 
   .input-field {

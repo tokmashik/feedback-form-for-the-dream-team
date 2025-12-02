@@ -13,12 +13,14 @@
         v-model="name"
         label="ФИО"
         placeholder="Иван Иванов"
+        required
         :error="errors.name"
       />
       <BaseInput
         v-model="email"
         label="Почта"
         placeholder="Введите email"
+        required
         :error="errors.email"
       />
     </div>
@@ -29,14 +31,15 @@
         type="phone"
         label="Номер телефона"
         placeholder="+7 (000) 000 00 00"
+        required
         :error="errors.phone"
       />
-      <!-- {{ selectedOption }} -->
       <BaseSelect
         id="experience"
         label="Грейд"
         v-model="selectedOption"
         :options="selectOptions"
+        required
         :error="errors.selectedOption"
       />
     </div>
@@ -89,7 +92,7 @@
         : 'Неверный формат email'
       : 'Email обязателен';
     errors.phone = phone.value.trim() ? '' : 'Телефон обязателен';
-    errors.selectedOption = selectedOption ? '' : 'Выберите грейд';
+    errors.selectedOption = selectedOption.value ? '' : 'Выберите грейд';
 
     return !Object.values(errors).some(Boolean);
   };
