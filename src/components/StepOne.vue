@@ -17,25 +17,25 @@
       />
     </div>
     <div style="gap: 28px; display: flex">
- <BaseInput
+      <BaseInput
         v-model="phone"
         type="phone"
         label="Номер телефона"
         placeholder="+7 (000) 000 00 00"
       />
- <BaseSelect
-      id="experience"
-      label="Грейд"
-      v-model="selectedOption"
-      :options="selectOptions"
-    />
+      <BaseSelect
+        id="experience"
+        label="Грейд"
+        v-model="selectedOption"
+        :options="selectOptions"
+      />
     </div>
     <BaseInput
-        v-model="phone"
-        type="textaria"
-        label="Дополнительная информация"
-        placeholder="Что понравилось и не понравилось"
-      />
+      v-model="phone"
+      type="textaria"
+      label="Дополнительная информация"
+      placeholder="Что понравилось и не понравилось"
+    />
     <div style="gap: 28px; display: flex">
       <BaseButton type="secondary" @click="resetForm">Отменить</BaseButton>
       <BaseButton type="primary" @click="submitForm">Отправить</BaseButton>
@@ -54,8 +54,8 @@
   const name = ref('');
   const email = ref('');
   const selectedOption = ref('');
-  const userRating = ref(0)
-  const userAdjectives = ref([])
+  const userRating = ref(0);
+  const userAdjectives = ref([]);
 
   // const router = useRouter()
   const submitForm = () => {

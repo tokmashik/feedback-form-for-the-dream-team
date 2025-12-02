@@ -13,7 +13,9 @@
     </div>
     <div style="gap: 28px; display: flex">
       <BaseButton type="secondary" @click="resetForm">Закрыть</BaseButton>
-      <BaseButton type="primary" @click="submitForm">Попробовать снова</BaseButton>
+      <BaseButton type="primary" @click="submitForm"
+        >Попробовать снова</BaseButton
+      >
     </div>
     Обратиться в тех поддержку
   </form>

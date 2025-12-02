@@ -14,24 +14,26 @@
 </template>
 
 <script setup>
-defineProps({
-  filled: {
-    type: Boolean,
-    default: false,
-  },
-})
+  defineProps({
+    filled: {
+      type: Boolean,
+      default: false,
+    },
+  });
 </script>
 
 <style scoped lang="scss">
-.icon-star {
-  width: 44px;
-  height: 44px;
-  color: var(--color-star-bg);
-  cursor: pointer;
-  transition: stroke 0.2s ease, fill 0.2s ease;
-}
+  .icon-star {
+    width: 44px;
+    height: 44px;
+    color: var(--color-star-bg);
+    cursor: pointer;
+    transition:
+      stroke 0.2s ease,
+      fill 0.2s ease;
+  }
 
-.icon-star:hover path {
-  stroke: var(--color-star-bg-hover);
-}
+  .icon-star:hover path {
+    stroke: var(--color-star-bg-hover);
+  }
 </style>
