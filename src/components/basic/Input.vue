@@ -39,7 +39,7 @@
     id: { type: String, default: '' },
     disabled: { type: Boolean, default: false },
     error: { type: String, default: '' },
-    required: { type: Boolean, default: false }, // новый проп
+    required: { type: Boolean, default: false },
   });
 
   defineEmits(['update:modelValue']);

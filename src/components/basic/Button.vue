@@ -11,7 +11,7 @@
 
 <script setup>
   defineProps({
-    type: { type: String, default: 'primary' }, // primary / secondary / custom
+    type: { type: String, default: 'primary' },
     disabled: { type: Boolean, default: false },
   });
 
