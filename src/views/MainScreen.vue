@@ -15,8 +15,8 @@
 
 <script setup>
   import ModalWrapper from '@/components/ModalWrapper.vue';
-  import FeedbackForm from '@/components/StepOne.vue';
-  import SuccessForm from '@/components/SuccessScreen.vue';
+  import FeedbackForm from '@/components/FeedbackForm.vue';
+  import SuccessForm from '@/components/SuccessForm.vue';
   import BaseButton from '@/components/basic/Button.vue';
 
   import { useModal } from '@/composables/useModal';
