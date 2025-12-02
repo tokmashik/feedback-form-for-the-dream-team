@@ -1,9 +1,21 @@
 # Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Тестовое задание для https://hh.ru/vacancy/127971290?from=share_ios
 
 Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
 
 
-ESLint автоматическое исправление ошибок:
+# ESLint автоматическое исправление ошибок:
 npx eslint src --ext .js,.vue --fix
+
+# Форматирование все JS и Vue файлы в src
+npx prettier --write "src/**/*.{js,vue}"
+
+# просто проверить ошибки
+npx eslint src --ext .js,.vue
+
+# 1. Сначала автофикс ESLint (отрегулирует отступы, правила Vue)
+yarn lint:fix
+
+# 2. Потом Prettier (сделает одинарные кавычки, пробелы, точки с запятой)
+yarn format
