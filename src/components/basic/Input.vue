@@ -34,14 +34,20 @@
   }
 
   .input-label {
-    margin-bottom: 0.25rem;
-    font-weight: 500;
-    font-size: 0.875rem;
+    /* margin-bottom: 0.25rem; */
+    /* font-weight: 500; */
+    /* font-size: 0.875rem; */
+    justify-content: start;
+    display: flex;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+color: #6F6C90;
   }
 
   .input-field {
-    width: 260.5px;
-    height: 56px;
+    /* width: 260.5px; */
+    /* height: 56px; */
     padding: 14px 16px;
     border-radius: 8px;
     background: var(--color-neutral-200);
@@ -54,4 +60,9 @@
   .input-field:focus {
     border: 1px solid #4a3aff;
   }
+
+  .input-field::placeholder {
+  color: #A0A3BD;
+}
+
 </style>

@@ -30,7 +30,7 @@
 
 <style lang="scss">
   .form {
-    background-color: #fff;
+    background-color: var(--color-neutral-100);
     gap: 40px;
     border-radius: 32px;
     padding: 44px;

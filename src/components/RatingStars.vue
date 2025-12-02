@@ -1,6 +1,7 @@
 <template>
-  <div class="p-small">Пожалуйста, оцените свой опыт прохождения тестового</div>
-  <div class="rating-wrapper">
+  <div style="gap: 20px;">
+    <div class="p-small">Пожалуйста, оцените свой опыт прохождения тестового</div>
+    <div class="rating-wrapper">
     <div class="stars">
       <StarIcon
         v-for="index in 5"
@@ -11,8 +12,8 @@
         @click="setRating(index)"
       />
     </div>
-
-    <div class="adjectives" v-if="currentAdjectives.length">
+  </div>
+  <div class="adjectives" v-if="currentAdjectives.length">
       <div
         v-for="item in currentAdjectives"
         :key="item.code"
@@ -20,10 +21,11 @@
         :class="{ selected: selectedAdjectives.includes(item.code) }"
         @click="toggleAdjective(item.code)"
       >
-        {{ item.text }}
+      <div class=".p-base"> {{ item.text }}</div>
       </div>
     </div>
   </div>
+  
 </template>
 
 <script setup>
@@ -58,7 +60,7 @@ const emit = defineEmits(['update:rating', 'update:adjectives'])
 
 function setRating(value) {
   rating.value = value
-  currentAdjectives.value = value <= 3 ? arrayOfNegativeAdjectives : arrayOfPositiveAdjectives
+  currentAdjectives.value = value <= 2 ? arrayOfNegativeAdjectives : arrayOfPositiveAdjectives
   selectedAdjectives.value = []
   emitData()
 }
@@ -81,19 +83,21 @@ function emitData() {
 <style scoped lang="scss">
 .rating-wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: 16px;
+  margin: 20px 0 36px 0;
 }
 
 .stars {
   display: flex;
-  gap: 8px;
+  gap: 22px;
 }
 
 .adjectives {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  max-width: 550px;
+  gap: 16px;
 }
 
 .adjective {
@@ -104,7 +108,7 @@ function emitData() {
   // height: 38px;
   border-radius: 100px;
   padding: 5px 16px;
-  background: #eff0f6;
+  background: var(--color-neutral-300);
   cursor: pointer;
   user-select: none;
   transition: background 0.2s, color 0.2s;

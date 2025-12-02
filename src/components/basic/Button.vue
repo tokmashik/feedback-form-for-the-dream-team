@@ -34,7 +34,7 @@
 
     &.primary {
       background-color: var(--color-primary1);
-      color: #fff;
+      color: var(--color-neutral-100);
 
       &:hover:not(:disabled) {
         background-color: #6153fd;
@@ -42,7 +42,7 @@
     }
 
     &.secondary {
-      background-color: #fff;
+      background-color: var(--color-neutral-100);
       color: #4a3aff;
       border: 1px solid #4a3aff;
 

@@ -8,21 +8,34 @@
       />
     </div>
     <div style="gap: 28px; display: flex">
-      <BaseInput v-model="name" label="Имя" placeholder="Введите имя" />
+      <BaseInput v-model="name" label="ФИО" placeholder="Иван Иванов" />
       <BaseInput
         v-model="email"
         type="email"
-        label="Email"
+        label="Почта"
         placeholder="Введите email"
       />
     </div>
-
-    <BaseSelect
+    <div style="gap: 28px; display: flex">
+ <BaseInput
+        v-model="phone"
+        type="phone"
+        label="Номер телефона"
+        placeholder="+7 (000) 000 00 00"
+      />
+ <BaseSelect
       id="experience"
-      label="Опыт прохождения тестового"
+      label="Грейд"
       v-model="selectedOption"
       :options="selectOptions"
     />
+    </div>
+    <BaseInput
+        v-model="phone"
+        type="textaria"
+        label="Дополнительная информация"
+        placeholder="Что понравилось и не понравилось"
+      />
     <div style="gap: 28px; display: flex">
       <BaseButton type="secondary" @click="resetForm">Отменить</BaseButton>
       <BaseButton type="primary" @click="submitForm">Отправить</BaseButton>
@@ -65,8 +78,10 @@
 
 <style lang="scss">
   .form {
-    background-color: #fff;
-    gap: 40px;
+    background-color: var(--color-neutral-100);
+    gap: 36px;
+    // display: flex;
+    // justify-content: center;
     border-radius: 32px;
     padding: 44px;
   }

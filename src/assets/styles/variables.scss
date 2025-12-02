@@ -37,6 +37,7 @@
     line-height: $line;
     letter-spacing: 0;
     color: var(--color-neutral-800);
+    margin: 0 0 10px 0;
   }
   
   h1 { @include heading(50px, 62px, 700); }
