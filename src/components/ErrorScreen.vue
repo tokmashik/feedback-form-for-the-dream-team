@@ -6,8 +6,8 @@
 
       <BasicIcon
         name="error"
-        width="157.359375"
-        height="143.41476440429688"
+        width="157"
+        height="143"
         color="white"
       />
     </div>
@@ -30,11 +30,11 @@
   };
 </script>
 
-<style lang="scss">
+<!-- <style lang="scss">
   .form {
     background-color: var(--color-neutral-100);
     gap: 40px;
     border-radius: 32px;
     padding: 44px;
   }
-</style>
+</style> -->

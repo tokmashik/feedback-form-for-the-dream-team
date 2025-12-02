@@ -11,7 +11,7 @@
       </ModalWrapper>
   
       <!-- Кнопка для повторного открытия формы (не обязательно) -->
-      <Button @click="openFeedback">Оставить отзыв снова</Button>
+      <BaseButton type="secondary" @click="openFeedback">Оставить отзыв снова</BaseButton>
     </div>
   </template>
   
@@ -19,7 +19,7 @@
 import ModalWrapper from '@/components/ModalWrapper.vue';
 import FeedbackForm from '@/components/StepOne.vue';
 import SuccessForm from '@/components/SuccessScreen.vue';
-// import Button from '@/components/basic/Button.vue'; // если у тебя кнопка в basic
+import BaseButton from '@/components/basic/Button.vue';
 
   import { useModal } from '@/composables/useModal';
 //   import ModalWrapper from './components/ModalWrapper.vue';

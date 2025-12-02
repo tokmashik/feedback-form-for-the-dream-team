@@ -19,15 +19,19 @@
   import BasicIcon from './basic/BasicIcon.vue';
   import BaseButton from './basic/Button.vue';
 
+  const emit = defineEmits(['close']);
+
   const submitForm = () => {
-    console.log('Форма отправлена');
+    console.log('Форма успеха закрыта');
+    emit('close');
   };
 </script>
-<style lang="scss">
+
+<!-- <style lang="scss">
   .form {
     background-color: var(--color-neutral-100);
     gap: 40px;
     border-radius: 32px;
     padding: 44px;
   }
-</style>
+</style> -->
