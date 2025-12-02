@@ -1,12 +1,26 @@
 <template>
   <div class="custom-select" ref="selectRef">
-    <label v-if="label" class="input-label">{{ label }}</label>
-    <div class="select-box" :class="{ open: isOpen }" @click="toggleDropdown">
-      <span class="selected-text">
+    <label v-if="label" class="custom-select__label">{{ label }}</label>
+
+    <div
+      class="custom-select__box"
+      :class="{ open: isOpen }"
+      @click="toggleDropdown"
+    >
+      <span
+        class="custom-select__selected-text"
+        :class="{ 'custom-select__selected-text--active': modelValue }"
+      >
         {{ selectedLabel || placeholder }}
       </span>
 
-      <svg class="arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <svg
+        class="custom-select__arrow"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+      >
         <path
           d="M5 7.5L10 12.5L15 7.5"
           stroke="#6F6C90"
@@ -17,12 +31,11 @@
       </svg>
     </div>
 
-    <!-- Dropdown list -->
-    <div v-if="isOpen" class="dropdown">
+    <div v-if="isOpen" class="custom-select__dropdown">
       <div
         v-for="option in filteredOptions"
         :key="option.value"
-        class="dropdown-item"
+        class="custom-select__dropdown-item"
         :class="{ selected: option.value === modelValue }"
         @click="select(option.value)"
       >
@@ -46,7 +59,6 @@
   });
 
   const emit = defineEmits(['update:modelValue']);
-
   const isOpen = ref(false);
   const selectRef = ref(null);
 
@@ -86,82 +98,80 @@
     display: flex;
     flex-direction: column;
     position: relative;
-  }
 
-  .input-label {
-    margin-bottom: 4px;
-    font-size: 14px;
-    color: #6f6c90;
-    font-weight: 400;
-    line-height: 20px;
-    justify-content: start;
-    display: flex;
-  }
-
-  .select-box {
-    width: 100%;
-    // height: 44px;
-    padding: 12px 16px;
-    border-radius: 8px;
-    background: var(--color-neutral-200);
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: border 0.2s ease;
-
-    .selected-text {
-      color: #a0a3bd;
-      font-size: 16px;
-    }
-    .selected-text::selection {
-      background-color: #b8b2ff; /* фон выделения */
-    }
-    .arrow {
-      transition: transform 0.25s ease;
+    &__label {
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: #6f6c90;
+      font-weight: 400;
+      line-height: 20px;
     }
 
-    &.open {
-      border: 1px solid #4a3aff;
+    &__box {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: var(--color-neutral-200);
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: border 0.2s ease;
 
-      .arrow {
-        transform: rotate(180deg);
+      &.open {
+        border: 1px solid #4a3aff;
+
+        .custom-select__arrow {
+          transform: rotate(180deg);
+        }
+      }
+
+      .custom-select__selected-text {
+        color: #a0a3bd;
+        font-size: 16px;
+
+        &--active {
+          color: #170f49;
+        }
+      }
+
+      .custom-select__arrow {
+        transition: transform 0.25s ease;
       }
     }
-  }
 
-  .dropdown {
-    margin-top: 8px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
-    overflow: hidden;
-    z-index: 100;
-    position: absolute;
-    width: 100%;
-  }
-
-  .dropdown-item {
-    width: 100%;
-    height: 44px;
-    padding: 12px 16px;
-    background: #ffffff;
-    color: #4e4b66;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: background 0.15s ease;
-    gap: 8px;
-    font-size: 16px;
-
-    &:hover {
-      background: #f3f4f6;
+    &__dropdown {
+      margin-top: 8px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      z-index: 100;
+      position: absolute;
+      width: 100%;
     }
 
-    &.selected {
-      background: var(--color-neutral-600);
-      color: #fff;
+    &__dropdown-item {
+      width: 100%;
+      height: 44px;
+      padding: 12px 16px;
+      background: #ffffff;
+      color: #4e4b66;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: background 0.15s ease;
+      font-size: 16px;
+
+      &:hover {
+        background: #f3f4f6;
+      }
+
+      &.selected {
+        background: var(--color-neutral-600);
+        color: #fff;
+      }
     }
   }
 </style>

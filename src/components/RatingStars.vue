@@ -1,10 +1,11 @@
 <template>
-  <div style="gap: 20px">
-    <div class="p-small">
+  <div class="rating-stars">
+    <div class="rating-stars__label p-small">
       Пожалуйста, оцените свой опыт прохождения тестового
     </div>
-    <div class="rating-wrapper">
-      <div class="stars">
+
+    <div class="rating-stars__wrapper">
+      <div class="rating-stars__stars">
         <StarIcon
           v-for="index in 5"
           :key="index"
@@ -20,16 +21,22 @@
       <div
         v-if="currentAdjectives.length"
         :key="ratingGroupKey"
-        class="adjectives"
+        class="rating-stars__adjectives"
       >
         <div
           v-for="item in currentAdjectives"
           :key="item.code"
-          class="adjective"
-          :class="{ selected: selectedAdjectives.includes(item.code) }"
+          class="rating-stars__adjective"
+          :class="{
+            'rating-stars__adjective--selected': selectedAdjectives.includes(
+              item.code,
+            ),
+            'rating-stars__adjective--not-selected':
+              !selectedAdjectives.includes(item.code),
+          }"
           @click="toggleAdjective(item.code)"
         >
-          <div class="p-base">{{ item.text }}</div>
+          <div class="rating-stars__adjective-text p-base">{{ item.text }}</div>
         </div>
       </div>
     </Transition>
@@ -63,7 +70,6 @@
   ];
 
   const currentAdjectives = ref([]);
-
   const currentGroup = ref(null);
 
   const ratingGroupKey = computed(() =>
@@ -79,13 +85,12 @@
 
     if (newGroup !== currentGroup.value) {
       currentGroup.value = newGroup;
-
       currentAdjectives.value =
         newGroup === 'negative'
           ? arrayOfNegativeAdjectives
           : arrayOfPositiveAdjectives;
 
-      selectedAdjectives.value = []; // решила добавить сброс выбранных только при смене группы
+      selectedAdjectives.value = []; // сброс выбранных при смене группы
     }
 
     emitData();
@@ -109,50 +114,71 @@
 </script>
 
 <style scoped lang="scss">
-  .rating-wrapper {
+  .rating-stars {
     display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin: 20px 0 36px 0;
+    flex-direction: column;
+    gap: 20px;
+
+    &__label {
+      font-size: 14px;
+      color: #6f6c90;
+    }
+
+    &__wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0 36px 0;
+    }
+
+    &__stars {
+      display: flex;
+      gap: 22px;
+    }
+
+    &__adjectives {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 550px;
+      gap: 16px;
+    }
+
+    &__adjective {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100px;
+      padding: 5px 16px;
+      cursor: pointer;
+      user-select: none;
+      transition:
+        background 0.2s,
+        color 0.2s;
+
+      &--selected {
+        background: var(--color-neutral-600);
+
+        .rating-stars__adjective-text {
+          color: #fff;
+        }
+      }
+
+      &--not-selected {
+        background: var(--color-neutral-300);
+
+        .rating-stars__adjective-text {
+          color: #170f49;
+        }
+      }
+    }
+
+    &__adjective-text {
+      font-weight: 400;
+      line-height: 28px;
+      font-size: 16px;
+    }
   }
 
-  .stars {
-    display: flex;
-    gap: 22px;
-  }
-
-  .adjectives {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 550px;
-    gap: 16px;
-  }
-
-  .adjective {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100px;
-    padding: 5px 16px;
-    background: var(--color-neutral-300);
-    cursor: pointer;
-    user-select: none;
-    transition:
-      background 0.2s,
-      color 0.2s;
-  }
-
-  .adjective.selected {
-    background: var(--color-neutral-600);
-  }
-
-  .adjective.selected .p-base {
-    color: #fff;
-    font-weight: 400;
-    line-height: 28px;
-  }
-
-  /* Плавное исчезновение и появление всего блока, потому что иначе слишком резкое появление */
+  /* Плавное появление/исчезновение блока */
   .fade-block-enter-active,
   .fade-block-leave-active {
     transition:
