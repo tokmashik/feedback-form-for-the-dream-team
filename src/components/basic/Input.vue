@@ -1,7 +1,8 @@
 <template>
   <div class="base-input">
-    <label v-if="label" :for="id" class="input-label">
-      {{ label }}<span v-if="required" class="required-star">*</span>
+    <label v-if="label" :for="id" class="base-input__label">
+      {{ label }}
+      <span v-if="required" class="base-input__required">*</span>
     </label>
 
     <textarea
@@ -12,7 +13,7 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       :disabled="disabled"
-      :class="['input-field', { 'input-error': error }]"
+      :class="['base-input__field', { 'base-input__field--error': error }]"
     ></textarea>
 
     <input
@@ -23,10 +24,10 @@
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       :disabled="disabled"
-      :class="['input-field', { 'input-error': error }]"
+      :class="['base-input__field', { 'base-input__field--error': error }]"
     />
 
-    <span v-if="error" class="error-message">{{ error }}</span>
+    <span v-if="error" class="base-input__error">{{ error }}</span>
   </div>
 </template>
 
@@ -45,65 +46,59 @@
   defineEmits(['update:modelValue']);
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .base-input {
     display: flex;
     flex-direction: column;
+
+    &__label {
+      margin-bottom: 4px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-neutral-600);
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    &__required {
+      color: var(--color-danger);
+      margin-left: 2px;
+    }
+
+    &__field {
+      padding: 14px 16px;
+      border-radius: 8px;
+      background: var(--color-neutral-200);
+      border: 1px solid transparent;
+      font-size: 16px;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border 0.2s ease;
+      resize: none;
+      color: var(--color-neutral-800);
+
+      &:focus {
+        border: 1px solid var(--color-primary1);
+      }
+
+      &--error {
+        border: 1px solid var(--color-danger);
+      }
+
+      &::placeholder {
+        color: var(--color-neutral-500);
+      }
+    }
+
+    &__error {
+      color: var(--color-danger);
+      font-size: 12px;
+      margin-top: 4px;
+    }
   }
 
-  .input-label {
-    margin-bottom: 4px;
-    justify-content: start;
-    display: flex;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    color: var(--color-neutral-600);
-  }
-
-  .required-star {
-    color: var(--color-danger);
-    margin-left: 2px;
-  }
-
-  .input-field {
-    padding: 14px 16px;
-    border-radius: 8px;
-    background: var(--color-neutral-200);
-    border: 1px solid transparent;
-    font-size: 1rem;
-    outline: none;
-    transition: border 0.2s ease;
-    resize: none;
-    color: var(--color-neutral-800);
-  }
-
-  .input-field:focus {
-    border: 1px solid var(--color-primary1);
-  }
-
-  .input-field.input-error {
-    border: 1px solid var(--color-danger);
-  }
-
-  .input-field::placeholder {
-    color: var(--color-neutral-500);
-  }
-
-  .error-message {
-    color: var(--color-danger);
-    font-size: 12px;
-    margin-top: 4px;
-  }
-  textarea {
-    color: var(--color-neutral-800);
-    font-size: 16px;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .textarea-field {
-    min-height: 80px;
-  }
-  input::selection,
+  .base-input__field::selection,
   textarea::selection {
     background-color: #b8b2ff;
   }

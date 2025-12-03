@@ -49,7 +49,7 @@
   );
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .stepper {
     margin-bottom: 24px;
 

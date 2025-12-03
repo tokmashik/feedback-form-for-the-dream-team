@@ -1,21 +1,21 @@
 <template>
-  <div class="custom-select" ref="selectRef">
-    <label v-if="label" class="custom-select__label">{{ label }}</label>
+  <div class="select" ref="selectRef">
+    <label v-if="label" class="select__label">{{ label }}</label>
 
     <div
-      class="custom-select__box"
-      :class="{ open: isOpen }"
+      class="select__box"
+      :class="{ 'select__box--open': isOpen }"
       @click="toggleDropdown"
     >
       <span
-        class="custom-select__selected-text"
-        :class="{ 'custom-select__selected-text--active': modelValue }"
+        class="select__text"
+        :class="{ 'select__text--active': modelValue }"
       >
         {{ selectedLabel || placeholder }}
       </span>
 
       <svg
-        class="custom-select__arrow"
+        class="select__arrow"
         width="20"
         height="20"
         viewBox="0 0 20 20"
@@ -31,12 +31,12 @@
       </svg>
     </div>
 
-    <div v-if="isOpen" class="custom-select__dropdown">
+    <div v-if="isOpen" class="select__dropdown">
       <div
         v-for="option in filteredOptions"
         :key="option.value"
-        class="custom-select__dropdown-item"
-        :class="{ selected: option.value === modelValue }"
+        class="select__item"
+        :class="{ 'select__item--selected': option.value === modelValue }"
         @click="select(option.value)"
       >
         {{ option.label }}
@@ -52,10 +52,7 @@
     modelValue: { type: [String, Number], default: '' },
     label: { type: String, default: '' },
     placeholder: { type: String, default: 'Выберите' },
-    options: {
-      type: Array,
-      default: () => [],
-    },
+    options: { type: Array, default: () => [] },
   });
 
   const emit = defineEmits(['update:modelValue']);
@@ -93,7 +90,7 @@
 </script>
 
 <style scoped lang="scss">
-  .custom-select {
+  .select {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -102,7 +99,7 @@
       margin-bottom: 4px;
       font-size: 14px;
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       color: var(--color-neutral-600);
       font-weight: 400;
       line-height: 20px;
@@ -119,15 +116,15 @@
       cursor: pointer;
       transition: border 0.2s ease;
 
-      &.open {
+      &--open {
         border: 1px solid var(--color-primary1);
 
-        .custom-select__arrow {
+        .select__arrow {
           transform: rotate(180deg);
         }
       }
 
-      .custom-select__selected-text {
+      .select__text {
         color: var(--color-neutral-500);
         font-size: 16px;
 
@@ -136,7 +133,7 @@
         }
       }
 
-      .custom-select__arrow {
+      .select__arrow {
         transition: transform 0.25s ease;
       }
     }
@@ -152,7 +149,7 @@
       width: 100%;
     }
 
-    &__dropdown-item {
+    &__item {
       width: 100%;
       height: 44px;
       padding: 12px 16px;
@@ -168,7 +165,7 @@
         background: var(--color-primary1-hover-disabled);
       }
 
-      &.selected {
+      &--selected {
         background: var(--color-neutral-600);
         color: var(--color-neutral-100);
       }

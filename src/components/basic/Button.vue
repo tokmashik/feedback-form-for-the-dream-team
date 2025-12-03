@@ -1,7 +1,7 @@
 <template>
   <button
-    class="basic-button"
-    :class="type"
+    class="button"
+    :class="['button--' + type]"
     :disabled="disabled"
     @click="$emit('click')"
   >
@@ -18,8 +18,8 @@
   defineEmits(['click']);
 </script>
 
-<style lang="scss" scoped>
-  .basic-button {
+<style scoped lang="scss">
+  .button {
     width: 260.5px;
     height: 56px;
     border-radius: 8px;
@@ -33,7 +33,7 @@
     line-height: 28px;
     transition: all 0.2s;
 
-    &.primary {
+    &--primary {
       background-color: var(--color-primary1);
       color: var(--color-neutral-100);
 
@@ -42,7 +42,7 @@
       }
     }
 
-    &.secondary {
+    &--secondary {
       background-color: var(--color-neutral-100);
       color: var(--color-primary1);
       border: 1px solid var(--color-primary1);
