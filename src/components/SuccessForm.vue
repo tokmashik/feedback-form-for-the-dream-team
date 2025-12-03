@@ -35,11 +35,12 @@
   };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .success-form {
     display: flex;
     flex-direction: column;
     gap: 95px;
+    align-items: center;
 
     &__content {
       display: flex;
@@ -70,6 +71,32 @@
     &__button {
       align-self: center;
       width: 200px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 20px;
+
+      &__content {
+        gap: 20px;
+      }
+
+      &__title {
+        font-size: 24px;
+      }
+
+      &__subtitle {
+        font-size: 14px;
+      }
+
+      &__icon {
+        width: 120px !important;
+        height: 110px !important;
+      }
+
+      &__button {
+        width: 100%;
+        max-width: 260px;
+      }
     }
   }
 </style>

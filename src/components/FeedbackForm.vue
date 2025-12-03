@@ -74,10 +74,12 @@
           Отправить
         </BaseButton>
       </div>
-      <FormStepper
-        :filledFields="filledFieldsCount"
-        :totalFields="totalFields"
-      />
+      <div class="feedback-form__stepper">
+        <FormStepper
+          :filledFields="filledFieldsCount"
+          :totalFields="totalFields"
+        />
+      </div>
     </form>
   </div>
 </template>
@@ -143,6 +145,8 @@
   };
 
   const submitForm = () => {
+    console.log('kkkk');
+    
     if (!validateForm()) return;
 
     console.log({
@@ -155,7 +159,7 @@
       adjectives: userAdjectives.value,
     });
 
-    alert('Форма успешно отправлена!');
+    // alert('Форма успешно отправлена!');
   };
 
   const resetForm = () => {
@@ -178,7 +182,7 @@
   ];
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .feedback-form {
     display: flex;
     flex-direction: column;
@@ -187,11 +191,9 @@
     margin: 0 auto;
 
     &__header {
+      display: flex;
+      flex-direction: column;
       gap: 16px;
-    }
-
-    &__rating {
-      align-self: flex-start;
     }
 
     &__row {
@@ -201,6 +203,8 @@
 
       @media (max-width: 768px) {
         flex-direction: column;
+        gap: 16px;
+        max-width: 100%;
       }
     }
 
@@ -213,10 +217,41 @@
     &__actions {
       display: flex;
       gap: 28px;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      @media (max-width: 480px) {
+        flex-direction: column;
+        gap: 16px;
+      }
     }
 
     &__button {
       min-width: 120px;
+
+      @media (max-width: 480px) {
+        width: 100%;
+      }
+    }
+
+    &__stepper {
+      display: none;
+
+      @media (max-width: 480px) {
+        display: block;
+      }
+    }
+  }
+
+  .feedback-form-container {
+    padding: 24px;
+
+    @media (max-width: 768px) {
+      padding: 16px;
     }
   }
 </style>

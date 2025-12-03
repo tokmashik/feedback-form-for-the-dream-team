@@ -22,7 +22,7 @@
   });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .icon-star {
     width: 44px;
     height: 44px;
@@ -31,6 +31,26 @@
     transition:
       stroke 0.2s ease,
       fill 0.2s ease;
+
+    @media (max-width: 768px) {
+      width: 34px;
+      height: 34px;
+
+      svg {
+        width: 34px;
+        height: 34px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      width: 24px;
+      height: 24px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
 
   .icon-star:hover path {

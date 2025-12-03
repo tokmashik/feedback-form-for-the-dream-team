@@ -113,7 +113,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .rating-stars {
     display: flex;
     flex-direction: column;
@@ -122,17 +122,38 @@
     &__label {
       font-size: 14px;
       color: var(--color-neutral-600);
+
+      @media (max-width: 480px) {
+        font-size: 13px;
+        line-height: 18px;
+      }
     }
 
     &__wrapper {
       display: flex;
       justify-content: center;
       margin: 10px 0 26px 0;
+
+      @media (max-width: 480px) {
+        margin: 6px 0 18px 0;
+      }
     }
 
     &__stars {
       display: flex;
       gap: 22px;
+
+      @media (max-width: 768px) {
+        gap: 14px;
+      }
+
+      @media (max-width: 480px) {
+        gap: 10px;
+      }
+
+      @media (max-width: 360px) {
+        gap: 8px;
+      }
     }
 
     &__adjectives {
@@ -140,6 +161,14 @@
       flex-wrap: wrap;
       max-width: 550px;
       gap: 16px;
+
+      @media (max-width: 768px) {
+        gap: 12px;
+      }
+
+      @media (max-width: 480px) {
+        gap: 10px;
+      }
     }
 
     &__adjective {
@@ -153,6 +182,14 @@
       transition:
         background 0.2s,
         color 0.2s;
+
+      @media (max-width: 768px) {
+        padding: 4px 14px;
+      }
+
+      @media (max-width: 480px) {
+        padding: 4px 10px;
+      }
 
       &--selected {
         background: var(--color-neutral-600);
@@ -175,6 +212,16 @@
       font-weight: 400;
       line-height: 28px;
       font-size: 16px;
+
+      @media (max-width: 768px) {
+        font-size: 15px;
+        line-height: 24px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 14px;
+        line-height: 20px;
+      }
     }
   }
 
