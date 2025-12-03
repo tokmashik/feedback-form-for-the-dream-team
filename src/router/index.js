@@ -7,5 +7,6 @@ export default createRouter({
     { path: '/', component: MainScreen },
     { path: '/feedback', component: MainScreen },
     { path: '/success', component: MainScreen },
+    { path: '/error', component: MainScreen },
   ],
 });
