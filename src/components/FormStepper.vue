@@ -7,7 +7,6 @@
       >
         1
       </div>
-
       <div class="stepper__line">
         <div
           class="stepper__line-progress"
@@ -17,7 +16,7 @@
 
       <div
         class="stepper__step"
-        :class="{ 'stepper__step--active': step >= 2 }"
+        :class="{ 'stepper__step--active': lineWidth === 100 }"
       >
         2
       </div>
@@ -64,8 +63,8 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: var(--color-primary1);
-      color: var(--color-neutral-100);
+      background: var(--color-neutral-300);
+      color: var(--color-neutral-600);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -75,6 +74,7 @@
 
       &--active {
         background: var(--color-primary1);
+        color: var(--color-neutral-100);
       }
     }
 

@@ -74,7 +74,10 @@
           Отправить
         </BaseButton>
       </div>
-    <FormStepper :filledFields="filledFieldsCount" :totalFields="totalFields" />
+      <FormStepper
+        :filledFields="filledFieldsCount"
+        :totalFields="totalFields"
+      />
     </form>
   </div>
 </template>
@@ -113,9 +116,21 @@
   });
 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isFullNameValid = (fullName) => {
+    const parts = fullName.trim().split(/\s+/);
+
+    if (parts.length !== 3) return false;
+
+    return parts.every((word) => /^[A-Za-zА-Яа-яЁё-]{2,}$/.test(word));
+  };
 
   const validateForm = () => {
-    errors.name = name.value.trim() ? '' : 'ФИО обязательно';
+    errors.name = name.value.trim()
+      ? isFullNameValid(name.value)
+        ? ''
+        : 'ФИО должно состоять из 3 слов'
+      : 'ФИО обязательно';
+
     errors.email = email.value.trim()
       ? isValidEmail(email.value)
         ? ''
