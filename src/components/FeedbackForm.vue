@@ -210,10 +210,6 @@
       flex: 1;
     }
 
-    &__select {
-      width: 260.5px;
-    }
-
     &__actions {
       display: flex;
       gap: 28px;

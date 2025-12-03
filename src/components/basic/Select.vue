@@ -94,7 +94,6 @@
 
 <style scoped lang="scss">
   .custom-select {
-    width: 265px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -102,13 +101,14 @@
     &__label {
       margin-bottom: 4px;
       font-size: 14px;
+      display: flex;
+      justify-content: start;
       color: var(--color-neutral-600);
       font-weight: 400;
       line-height: 20px;
     }
 
     &__box {
-      width: 100%;
       padding: 12px 16px;
       border-radius: 8px;
       background: var(--color-neutral-200);
