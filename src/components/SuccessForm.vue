@@ -30,7 +30,7 @@
   const emit = defineEmits(['close']);
 
   const submitForm = () => {
-    console.log('Форма успеха закрыта');
+    console.log('Форма успешно отправлена');
     emit('close');
   };
 </script>

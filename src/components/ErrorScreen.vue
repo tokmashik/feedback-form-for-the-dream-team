@@ -20,7 +20,13 @@
   import BasicIcon from './basic/BasicIcon.vue';
   import BaseButton from './basic/Button.vue';
 
+  const emit = defineEmits(['submit', 'close']);
+
   const submitForm = () => {
-    console.log('Форма отправлена');
+    console.log('Усп, сломалось. Форма отправлена повторно');
+    emit('submit');
+  };
+  const resetForm = () => {
+    emit('close');
   };
 </script>
