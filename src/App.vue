@@ -11,7 +11,7 @@
     </ModalWrapper>
 
     <ModalWrapper v-if="currentRoute === '/error'">
-      <ErrorScreen @close="goHome" @submit="goRandom"/>
+      <ErrorScreen @close="goHome" @submit="goRandom" />
     </ModalWrapper>
   </div>
 </template>

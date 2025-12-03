@@ -251,7 +251,6 @@
   }
 
   .feedback-form-container {
-    padding: 24px;
 
     @media (max-width: 768px) {
       padding: 16px;
