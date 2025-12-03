@@ -1,86 +1,146 @@
 :root {
-    /* Primary */
-    --color-primary1: #4A3AFF;
-    --color-primary1-light: #d2ceff;
-    --color-primary1-hover-disabled: #f3f2ff;
-    --color-primary1-disabled: #6153fd;
-    /* Secondary */
-    --color-secondary1: #D9DBE9;
-  
-    /* Neutrals */
-    --color-neutral-800: #170F49;
-    --color-neutral-700: #514F6E;
-    --color-neutral-600: #6F6C90;
-    --color-neutral-500: #A0A3BD;
-    --color-neutral-400: #D9DBE9;
-    --color-neutral-300: #EFF0F6;
-    --color-neutral-200: #F7F7FB;
-    --color-neutral-100: #FFFFFF;
-  
-    /* Semantic */
-    --color-success: #5BC729;
-    --color-success-bg: #EFFBE9;
-    --color-danger: #FD2727;
-    --color-danger-bg: #FDF2F2;
-    --color-warning: #FF9538;
-    --color-warning-bg: #FADEC5;
+   /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  /* шрифт */
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
 
-    /* Star */
-    --color-star-bg: #FFE01A;
-    --color-star-bg-hover: #f1d311;
+  color-scheme: light dark;
+  color: rgba(0, 0, 0, 0.87);
+  // background-color: var(--color-secondary1);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+  background-color: var(--color-secondary1);
+
+  }
+
+
+  #app {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  /* Primary */
+  --color-primary1: #4A3AFF;
+  --color-primary1-light: #d2ceff;
+  --color-primary1-hover-disabled: #f3f2ff;
+  --color-primary1-disabled: #6153fd;
+
+  /* Secondary */
+  --color-secondary1: #D9DBE9;
+
+  /* Neutrals */
+  --color-neutral-800: #170F49;
+  --color-neutral-700: #514F6E;
+  --color-neutral-600: #6F6C90;
+  --color-neutral-500: #A0A3BD;
+  --color-neutral-400: #D9DBE9;
+  --color-neutral-300: #EFF0F6;
+  --color-neutral-200: #F7F7FB;
+  --color-neutral-100: #FFFFFF;
+
+  /* Semantic */
+  --color-success: #5BC729;
+  --color-success-bg: #EFFBE9;
+  --color-danger: #FD2727;
+  --color-danger-bg: #FDF2F2;
+  --color-warning: #FF9538;
+  --color-warning-bg: #FADEC5;
+
+  /* Star */
+  --color-star-bg: #FFE01A;
+  --color-star-bg-hover: #f1d311;
 }
 
-    /* Заголовки */
+/* Темная тема */
+.dark-theme {
+  --color-primary1: #6153FD;
+  --color-primary1-light: #8178FF;
+  --color-primary1-hover-disabled: #4D3AFF;
+  --color-primary1-disabled: #3B2BBF;
 
-  @mixin heading($size, $line, $weight: 700) {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: $weight;
-    font-size: $size;
-    line-height: $line;
-    letter-spacing: 0;
-    color: var(--color-neutral-800);
-    margin: 0 0 10px 0;
-    user-select: none;
-  }
-  
-  h1 { @include heading(50px, 62px, 700); }
-  h2 { @include heading(34px, 46px, 700); }
-  h3 { @include heading(24px, 35px, 700); }
-  h4 { @include heading(22px, 28px, 500); }
-  h5 { @include heading(18px, 24px, 700); }
-  
-    /* Параграфы */
+  --color-secondary1: #2D2F41;
+
+  --color-neutral-800: #FFFFFF;
+  --color-neutral-700: #E0E0E0;
+  --color-neutral-600: #C0C0C0;
+  --color-neutral-500: #9A9A9A;
+  --color-neutral-400: #7A7A7A;
+  --color-neutral-300: #5A5A5A;
+  --color-neutral-200: #3A3A3A;
+  --color-neutral-100: #1A1A1A;
+
+  --color-success-bg: #264D17;
+  --color-danger-bg: #5A1515;
+  --color-warning-bg: #66411F;
+}
+
+/* =======================
+   Миксины
+======================= */
+
+/* Заголовки */
+@mixin heading($size, $line, $weight: 700) {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $line;
+  letter-spacing: 0;
+  color: var(--color-neutral-800);
+  margin: 0 0 10px 0;
+  user-select: none;
+}
+
+h1 { @include heading(50px, 62px, 700); }
+h2 { @include heading(34px, 46px, 700); }
+h3 { @include heading(24px, 35px, 700); }
+h4 { @include heading(22px, 28px, 500); }
+h5 { @include heading(18px, 24px, 700); }
+
+/* Параграфы */
 
 @mixin paragraph($size, $line, $weight: 400, $color: var(--color-neutral-600), $is-link: false) {
-    font-family: 'DM Sans', sans-serif;
-    font-size: $size;
-    line-height: $line;
-    font-weight: $weight;
-    letter-spacing: 0;
-    color: $color;
-    user-select: none;
-  
-    @if $is-link == true {
-      text-decoration: underline;
-      text-decoration-style: solid;
-      text-decoration-thickness: 1px;
-      text-decoration-offset: 2px;
-    }
+  font-family: 'DM Sans', sans-serif;
+  font-size: $size;
+  line-height: $line;
+  font-weight: $weight;
+  letter-spacing: 0;
+  color: $color;
+  user-select: none;
+
+  @if $is-link == true {
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 1px;
+    text-decoration-offset: 2px;
   }
-  
-  /* Base */
-  .p-base       { @include paragraph(16px, 28px, 400); }
-  .p-base-bold  { @include paragraph(16px, 28px, 600); }
-  
-  /* Small */
-  .p-small       { @include paragraph(14px, 20px, 400); }
-  .p-small-bold  { @include paragraph(14px, 20px, 600); }
-  
-  /* Mini */
-  .p-mini        { @include paragraph(12px, 16px, 400); }
-  .p-mini-bold   { @include paragraph(12px, 16px, 600); }
-  
-  /* Links */
-  .p-base-link  { @include paragraph(16px, 28px, 400, var(--color-primary1), true); }
-  .p-small-link { @include paragraph(14px, 20px, 400, var(--color-primary1), true); }
-  .p-mini-link  { @include paragraph(12px, 16px, 400, var(--color-primary1), true); }
+}
+
+/* Base */
+.p-base       { @include paragraph(16px, 28px, 400); }
+.p-base-bold  { @include paragraph(16px, 28px, 600); }
+
+/* Small */
+.p-small       { @include paragraph(14px, 20px, 400); }
+.p-small-bold  { @include paragraph(14px, 20px, 600); }
+
+/* Mini */
+.p-mini        { @include paragraph(12px, 16px, 400); }
+.p-mini-bold   { @include paragraph(12px, 16px, 600); }
+
+/* Links */
+.p-base-link  { @include paragraph(16px, 28px, 400, var(--color-primary1), true); }
+.p-small-link { @include paragraph(14px, 20px, 400, var(--color-primary1), true); }
+.p-mini-link  { @include paragraph(12px, 16px, 400, var(--color-primary1), true); }

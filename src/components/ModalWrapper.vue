@@ -1,10 +1,12 @@
 <template>
   <div class="modal">
     <div class="modal__content">
-      <button class="modal__close" @click="$emit('close')">
-        <!-- <img src="@/assets/svg/close.svg" alt="close" /> -->
-        <BasicIcon name="close" width="16" height="16" />
-      </button>
+      <div class="modal__top-right">
+        <ThemeSwitch />
+        <button class="modal__close" @click="$emit('close')">
+          <BasicIcon name="close" width="16" height="16" />
+        </button>
+      </div>
 
       <slot></slot>
     </div>
@@ -13,6 +15,7 @@
 
 <script setup>
   import BasicIcon from './basic/BasicIcon.vue';
+  import ThemeSwitch from './ThemeSwitch.vue';
 </script>
 
 <style scoped>
@@ -23,7 +26,6 @@
     align-items: center;
     justify-content: center;
     padding: 16px;
-    /* z-index: 1000; */
   }
 
   .modal__content {
@@ -39,28 +41,25 @@
     justify-content: flex-start;
   }
 
-  /* Кнопка-крестик */
-  .modal__close {
+  .modal__top-right {
     position: absolute;
     top: 20px;
     right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
+  .modal__close {
     width: 24px;
     height: 24px;
-
     border: none;
     background: none;
     padding: 0;
     cursor: pointer;
-
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .modal__close img {
-    width: 100%;
-    height: 100%;
   }
 
   @media (max-width: 768px) {
@@ -76,9 +75,13 @@
       border-radius: 16px;
     }
 
-    .modal__close {
+    .modal__top-right {
       top: 14px;
       right: 14px;
+      gap: 8px;
+    }
+
+    .modal__close {
       width: 20px;
       height: 20px;
     }
