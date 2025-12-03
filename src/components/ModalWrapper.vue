@@ -47,7 +47,6 @@
     right: 20px;
     display: flex;
     align-items: center;
-    gap: 12px;
   }
 
   .modal__close {
