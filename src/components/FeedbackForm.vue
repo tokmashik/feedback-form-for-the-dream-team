@@ -86,11 +86,14 @@
 
 <script setup>
   import { ref, reactive, computed } from 'vue';
+
   import FormStepper from './FormStepper.vue';
   import BaseButton from './basic/Button.vue';
   import RatingStars from './RatingStars.vue';
   import BaseInput from './basic/Input.vue';
   import BaseSelect from './basic/Select.vue';
+
+  const emit = defineEmits(['submit', 'close']);
 
   const name = ref('');
   const email = ref('');
@@ -110,6 +113,7 @@
     if (selectedOption.value) count++;
     return count;
   });
+
   const errors = reactive({
     name: '',
     email: '',
@@ -120,10 +124,10 @@
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isFullNameValid = (fullName) => {
     const parts = fullName.trim().split(/\s+/);
-
-    if (parts.length !== 3) return false;
-
-    return parts.every((word) => /^[A-Za-zА-Яа-яЁё-]{2,}$/.test(word));
+    return (
+      parts.length === 3 &&
+      parts.every((w) => /^[A-Za-zА-Яа-яЁё-]{2,}$/.test(w))
+    );
   };
 
   const validateForm = () => {
@@ -138,6 +142,7 @@
         ? ''
         : 'Неверный формат email'
       : 'Email обязателен';
+
     errors.phone = phone.value.trim() ? '' : 'Телефон обязателен';
     errors.selectedOption = selectedOption.value ? '' : 'Выберите грейд';
 
@@ -145,9 +150,7 @@
   };
 
   const submitForm = () => {
-    console.log('kkkk');
-    
-    if (!validateForm()) return;
+    // if (!validateForm()) return;
 
     console.log({
       name: name.value,
@@ -158,11 +161,11 @@
       rating: userRating.value,
       adjectives: userAdjectives.value,
     });
-
-    // alert('Форма успешно отправлена!');
+    emit('submit');
   };
 
   const resetForm = () => {
+    emit('close');
     name.value = '';
     email.value = '';
     phone.value = '';

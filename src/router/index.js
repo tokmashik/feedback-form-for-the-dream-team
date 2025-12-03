@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import MainScreen from '../views/MainScreen.vue';
+import MainScreen from '@/views/MainScreen.vue';
 
-const routes = [{ path: '/', name: 'main', component: MainScreen }];
-
-const router = createRouter({
+export default createRouter({
   history: createWebHistory(),
-  routes,
+  routes: [
+    { path: '/', component: MainScreen },
+    { path: '/feedback', component: MainScreen },
+    { path: '/success', component: MainScreen },
+  ],
 });
-
-export default router;
