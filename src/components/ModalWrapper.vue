@@ -14,42 +14,59 @@
 </template>
 
 <script setup>
-  import BasicIcon from './basic/BasicIcon.vue';
-  import ThemeSwitch from './ThemeSwitch.vue';
+import BasicIcon from './basic/BasicIcon.vue';
+import ThemeSwitch from './ThemeSwitch.vue';
 </script>
 
-<style scoped>
-  .modal {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-  }
+<style lang="scss">
+ .modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 
-  .modal__content {
+  &__content {
     position: relative;
     width: 90%;
     max-width: 549px;
     background-color: var(--color-neutral-100);
     border-radius: 32px;
     padding: 44px;
-    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+
+    @media (max-width: 768px) {
+      padding: 24px 30px;
+      border-radius: 24px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 18px 16px;
+      border-radius: 16px;
+    }
   }
 
-  .modal__top-right {
+  &__top-right {
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 20px;
     display: flex;
     align-items: center;
+
+    @media (max-width: 768px) {
+      top: 8px;
+      gap: 0px;
+    }
+
+    @media (max-width: 480px) {
+      top: 0px;
+      right: 10px;
+    }
   }
 
-  .modal__close {
+  &__close {
     width: 24px;
     height: 24px;
     border: none;
@@ -59,30 +76,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
 
-  @media (max-width: 768px) {
-    .modal__content {
-      padding: 24px;
-      border-radius: 24px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .modal__content {
-      padding: 20px;
-      border-radius: 16px;
-    }
-
-    .modal__top-right {
-      top: 14px;
-      right: 14px;
-      gap: 8px;
-    }
-
-    .modal__close {
+    @media (max-width: 480px) {
       width: 20px;
       height: 20px;
     }
   }
+}
 </style>

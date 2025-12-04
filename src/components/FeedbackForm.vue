@@ -2,7 +2,7 @@
   <div class="feedback">
     <transition name="fade" v-if="isMobile">
       <div class="feedback__mobile" :key="step">
-        <h2 class="feedback__title">Форма обратной связи</h2>
+        <h1 class="feedback__title">Форма обратной связи</h1>
 
         <div v-if="step === 1" class="feedback__mobile-step">
           <BaseInput
@@ -35,7 +35,10 @@
           />
 
           <div class="feedback__mobile-actions">
-            <BaseButton type="secondary" @click="resetForm">Отменить</BaseButton>
+            <BaseButton type="secondary"
+                        @click="resetForm"
+            >Отменить</BaseButton
+            >
             <BaseButton type="primary" @click="nextStep">Далее</BaseButton>
           </div>
         </div>
@@ -63,7 +66,10 @@
 
           <div class="feedback__mobile-actions">
             <BaseButton type="secondary" @click="prevStep">Назад</BaseButton>
-            <BaseButton type="primary" @click="submitForm">Отправить</BaseButton>
+            <BaseButton type="primary"
+                        @click="submitForm"
+            >Отправить</BaseButton
+            >
           </div>
         </div>
 
@@ -76,9 +82,8 @@
     </transition>
 
     <form v-else class="feedback__form" @submit.prevent="submitForm">
-
       <div class="feedback__header">
-        <h2 class="feedback__title">Форма обратной связи</h2>
+        <h1 class="feedback__title">Форма обратной связи</h1>
 
         <RatingStars
           class="feedback__rating"
@@ -179,18 +184,31 @@ const errors = reactive({
 const totalFields = 4;
 
 const filledFieldsCount = computed(() => {
-  return [name.value, email.value, phone.value, selectedOption.value].filter(Boolean).length;
+  return [name.value, email.value, phone.value, userRating.value].filter(
+    Boolean,
+  ).length;
 });
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const isFullNameValid = (fullName) => {
   const parts = fullName.trim().split(/\s+/);
-  return parts.length === 3 && parts.every((w) => /^[A-Za-zА-Яа-яЁё-]{2,}$/.test(w));
+  return (
+    parts.length === 3 &&
+      parts.every((w) => /^[A-Za-zА-Яа-яЁё-]{2,}$/.test(w))
+  );
 };
 
 const validateForm = () => {
-  errors.name = name.value ? (isFullNameValid(name.value) ? '' : 'ФИО должно состоять из трёх слов') : 'ФИО обязательно';
-  errors.email = email.value ? (isValidEmail(email.value) ? '' : 'Неверный email') : 'Email обязателен';
+  errors.name = name.value
+    ? isFullNameValid(name.value)
+      ? ''
+      : 'ФИО должно состоять из трёх слов'
+    : 'ФИО обязательно';
+  errors.email = email.value
+    ? isValidEmail(email.value)
+      ? ''
+      : 'Неверный email'
+    : 'Email обязателен';
   errors.phone = phone.value ? '' : 'Телефон обязателен';
   errors.selectedOption = selectedOption.value ? '' : 'Выберите грейд';
 
@@ -206,18 +224,18 @@ const maskPhone = () => {
   }
 
   phone.value =
-    '+7 (' +
-    digits.slice(1, 4) +
-    ') ' +
-    digits.slice(4, 7) +
-    ' ' +
-    digits.slice(7, 9) +
-    ' ' +
-    digits.slice(9, 11);
+      '+7 (' +
+      digits.slice(1, 4) +
+      ') ' +
+      digits.slice(4, 7) +
+      ' ' +
+      digits.slice(7, 9) +
+      ' ' +
+      digits.slice(9, 11);
 };
 
 const nextStep = () => {
-  // if (validateForm()) 
+  // if (validateForm())
   step.value = 2;
 };
 
@@ -249,11 +267,11 @@ const resetForm = () => {
   step.value = 1;
 
   name.value =
-    email.value =
-    phone.value =
-    selectedOption.value =
-    additionalInfo.value =
-      '';
+      email.value =
+      phone.value =
+      selectedOption.value =
+      additionalInfo.value =
+        '';
   userRating.value = 0;
   userAdjectives.value = [];
 
@@ -270,91 +288,92 @@ const selectOptions = [
 </script>
 
 <style lang="scss">
-.feedback {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 16px;
+  .feedback {
+    max-width: 800px;
 
-  &__title {
-    margin-bottom: 16px;
-  }
-
-  &__form,
-  &__mobile {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  &__header {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  &__row {
-    display: flex;
-    gap: 24px;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 12px;
+    &__title {
+      margin-bottom: 16px;
     }
-  }
 
-  &__input,
-  &__select,
-  &__textarea {
-    flex: 1;
-  }
+    &__form,
+    &__mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
 
-  &__actions,
-  &__mobile-actions {
-    display: flex;
-    gap: 20px;
+    &__header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
 
-    @media (max-width: 768px) {
-        justify-content: center;
+    &__row {
+      display: flex;
+      gap: 24px;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    &__input,
+    &__select,
+    &__textarea {
+      flex: 1;
+    }
+
+    &__actions {
+      display: flex;
+      gap: 20px;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
         gap: 8px;
         width: 100%;
       }
 
-    @media (max-width: 480px) {
+      @media (max-width: 480px) {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+    &__mobile-actions {
+      @media (max-width: 768px) {
+        display: flex;
+
+        gap: 8px;
+      }
+    }
+    &__mobile-step {
+      display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
+    }
 
-      width: 100%;
+    &__quick-answers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    &__quick-answer {
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      background: #f6f6f6;
+      cursor: pointer;
+      font-size: 14px;
+
+      &--active {
+        background: #ffe08a;
+        border-color: #f2b400;
+      }
+    }
+
+    &__stepper {
+      margin-top: auto;
     }
   }
-
-  &__mobile-step {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  &__quick-answers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  &__quick-answer {
-    padding: 8px 14px;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-    background: #f6f6f6;
-    cursor: pointer;
-    font-size: 14px;
-
-    &--active {
-      background: #ffe08a;
-      border-color: #f2b400;
-    }
-  }
-
-  &__stepper {
-    margin-top: auto;
-  }
-}
 </style>

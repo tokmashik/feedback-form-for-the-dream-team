@@ -10,12 +10,12 @@
 </template>
 
 <script setup>
-  defineProps({
-    type: { type: String, default: 'primary' },
-    disabled: { type: Boolean, default: false },
-  });
+defineProps({
+  type: { type: String, default: 'primary' },
+  disabled: { type: Boolean, default: false },
+});
 
-  defineEmits(['click']);
+defineEmits(['click']);
 </script>
 
 <style scoped lang="scss">
@@ -55,6 +55,19 @@
     &:disabled {
       background-color: var(--color-primary1-light);
       cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+      height: 50px;
+      gap: 8px;
+    }
+
+    @media (max-width: 480px) {
+      height: 44px;
+      padding: 10px 8px;
+      gap: 8px;
+      font-size: 14px;
+      line-height: 20px;
     }
   }
 </style>

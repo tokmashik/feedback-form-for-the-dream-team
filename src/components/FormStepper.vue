@@ -25,34 +25,30 @@
 </template>
 
 <script setup>
-  import { computed, watch, ref } from 'vue';
+import { computed, watch, ref } from 'vue';
 
-  const props = defineProps({
-    filledFields: { type: Number, required: true },
-    totalFields: { type: Number, default: 4 },
-  });
+const props = defineProps({
+  filledFields: { type: Number, required: true },
+  totalFields: { type: Number, default: 4 },
+});
 
-  const step = ref(1);
+const step = ref(1);
 
-  // Прогресс линии
-  const lineWidth = computed(() =>
-    Math.min((props.filledFields / props.totalFields) * 100, 100),
-  );
+const lineWidth = computed(() =>
+  Math.min((props.filledFields / props.totalFields) * 100, 100),
+);
 
-  // Обновляем активный шаг
-  watch(
-    () => props.filledFields,
-    (val) => {
-      step.value = val >= props.totalFields ? 2 : 1;
-    },
-    { immediate: true },
-  );
+watch(
+  () => props.filledFields,
+  (val) => {
+    step.value = val >= props.totalFields ? 2 : 1;
+  },
+  { immediate: true },
+);
 </script>
 
 <style lang="scss">
   .stepper {
-    margin-bottom: 24px;
-
     &__steps {
       display: flex;
       align-items: center;

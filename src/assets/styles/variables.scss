@@ -85,10 +85,6 @@
   --color-warning-bg: #66411F;
 }
 
-/* =======================
-   Миксины
-======================= */
-
 /* Заголовки */
 @mixin heading($size, $line, $weight: 700) {
   font-family: 'DM Sans', sans-serif;
@@ -101,7 +97,21 @@
   user-select: none;
 }
 
-h1 { @include heading(50px, 62px, 700); }
+h1 {
+  @include heading(50px, 62px, 700);
+
+  @media (max-width: 768px) {
+    font-size: 22px;
+    line-height: 24px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
 h2 { @include heading(34px, 46px, 700); }
 h3 { @include heading(24px, 35px, 700); }
 h4 { @include heading(22px, 28px, 500); }
