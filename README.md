@@ -1,9 +1,12 @@
 # Vue 3 + Vite
 
+На хостинге https://feedback-form-for-the-dream-team-1r.vercel.app/
+
 Тестовое задание для https://hh.ru/vacancy/127971290?from=share_ios
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+Сделала рандомное появление окон о провале и успехе, чтобы показать оба их вида, нужно доработать темную тему и адаптив, но вцелом за короткий срок годный пет-проект
 
+Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
 
 # ESLint автоматическое исправление ошибок:
 npx eslint src --ext .js,.vue --fix

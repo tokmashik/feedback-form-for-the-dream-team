@@ -11,30 +11,30 @@
     </ModalWrapper>
 
     <ModalWrapper @close="closeModal" v-if="currentRoute === '/error'">
-      <ErrorScreen @close="closeModal" @submit="goRandom" />
+      <ErrorForm @close="closeModal" @submit="goRandom" />
     </ModalWrapper>
   </div>
 </template>
 
 <script setup>
-  import { computed } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
+import { computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-  import ModalWrapper from '@/components/ModalWrapper.vue';
-  import FeedbackForm from '@/components/FeedbackForm.vue';
-  import SuccessForm from '@/components/SuccessForm.vue';
-  import ErrorScreen from '@/components/ErrorScreen.vue';
+import ModalWrapper from '@/components/ModalWrapper.vue';
+import FeedbackForm from '@/components/FeedbackForm.vue';
+import SuccessForm from '@/components/SuccessForm.vue';
+import ErrorForm from '@/components/ErrorForm.vue';
 
-  const route = useRoute();
-  const router = useRouter();
+const route = useRoute();
+const router = useRouter();
 
-  const currentRoute = computed(() => route.path);
+const currentRoute = computed(() => route.path);
 
-  const closeModal = () => router.push('/');
+const closeModal = () => router.push('/');
 
-  // Так как нам нужно отобразить 2 вида формы, то рандомно просто показываем одну из них
-  const goRandom = () => {
-    const isSuccess = Math.random() > 0.5;
-    router.push(isSuccess ? '/success' : '/error');
-  };
+// Так как нам нужно отобразить 2 вида формы, то рандомно просто показываем одну из них
+const goRandom = () => {
+  const isSuccess = Math.random() > 0.5;
+  router.push(isSuccess ? '/success' : '/error');
+};
 </script>
