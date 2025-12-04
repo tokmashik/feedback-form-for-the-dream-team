@@ -1,13 +1,10 @@
 :root {
-   /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
-  /* шрифт */
+  font-family: 'DM Sans', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  font-family: 'DM Sans', sans-serif;
 
   color-scheme: light dark;
-  color: rgba(0, 0, 0, 0.87);
-  // background-color: var(--color-secondary1);
+  color: var(--color-neutral-100);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -87,7 +84,6 @@
 
 /* Заголовки */
 @mixin heading($size, $line, $weight: 700) {
-  font-family: 'DM Sans', sans-serif;
   font-weight: $weight;
   font-size: $size;
   line-height: $line;
@@ -97,8 +93,8 @@
   user-select: none;
 }
 
-h1 {
-  @include heading(50px, 62px, 700);
+h2 {
+  @include heading(34px, 46px, 700);
 
   @media (max-width: 768px) {
     font-size: 22px;
@@ -111,8 +107,7 @@ h1 {
     line-height: 24px;
   }
 }
-
-h2 { @include heading(34px, 46px, 700); }
+h1 { @include heading(50px, 62px, 700); }
 h3 { @include heading(24px, 35px, 700); }
 h4 { @include heading(22px, 28px, 500); }
 h5 { @include heading(18px, 24px, 700); }
@@ -120,7 +115,6 @@ h5 { @include heading(18px, 24px, 700); }
 /* Параграфы */
 
 @mixin paragraph($size, $line, $weight: 400, $color: var(--color-neutral-600), $is-link: false) {
-  font-family: 'DM Sans', sans-serif;
   font-size: $size;
   line-height: $line;
   font-weight: $weight;

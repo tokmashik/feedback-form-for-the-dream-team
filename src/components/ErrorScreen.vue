@@ -2,7 +2,7 @@
   <form class="error-form" @submit.prevent="submitForm">
     <div class="error-form__content">
       <div>
-        <h1 class="error-form__title">Что-то пошло не так</h1>
+        <h2 class="error-form__title">Что-то пошло не так</h2>
         <div class="error-form__subtitle p-small">
           Попробуйте заполнить форму позже
         </div>

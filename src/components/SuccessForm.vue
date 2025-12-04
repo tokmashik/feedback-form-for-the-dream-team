@@ -2,7 +2,7 @@
   <form class="success-form" @submit.prevent="submitForm">
     <div class="success-form__content">
       <div>
-        <h1 class="success-form__title">Спасибо, ваш ответ отправлен</h1>
+        <h2 class="success-form__title">Спасибо, ваш ответ отправлен</h2>
         <div class="success-form__subtitle">
           Свяжемся с вами в ближайшее время
         </div>

@@ -72,7 +72,6 @@
       background: var(--color-neutral-200);
       border: 1px solid transparent;
       font-size: 16px;
-      font-family: 'DM Sans', sans-serif;
       outline: none;
       transition: border 0.2s ease;
       resize: none;

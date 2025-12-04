@@ -2,7 +2,7 @@
   <div class="feedback">
     <dev name="fade" v-if="isMobile">
       <div class="feedback__mobile" :key="step">
-        <h1 class="feedback__title">Форма обратной связи</h1>
+        <h2 class="feedback__title">Форма обратной связи</h2>
 
         <div v-show="step === 1" class="feedback__mobile-step">
           <BaseInput
@@ -83,7 +83,7 @@
 
     <form v-else class="feedback__form" @submit.prevent="submitForm">
       <div class="feedback__header">
-        <h1 class="feedback__title">Форма обратной связи</h1>
+        <h2 class="feedback__title">Форма обратной связи</h2>
 
         <RatingStars
           class="feedback__rating"
@@ -297,10 +297,6 @@ const selectOptions = [
   .feedback {
     max-width: 800px;
 
-    &__title {
-      margin-bottom: 16px;
-    }
-
     &__form,
     &__mobile {
       display: flex;
@@ -311,7 +307,7 @@ const selectOptions = [
     &__header {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
     &__row {
@@ -356,26 +352,6 @@ const selectOptions = [
       display: flex;
       flex-direction: column;
       gap: 20px;
-    }
-
-    &__quick-answers {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    &__quick-answer {
-      padding: 8px 14px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      background: #f6f6f6;
-      cursor: pointer;
-      font-size: 14px;
-
-      &--active {
-        background: #ffe08a;
-        border-color: #f2b400;
-      }
     }
 
     &__stepper {
