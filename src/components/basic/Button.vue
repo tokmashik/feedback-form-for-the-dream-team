@@ -20,7 +20,7 @@ defineEmits(['click']);
 
 <style scoped lang="scss">
   .button {
-    width: 260.5px;
+    width: 100%;
     height: 56px;
     border-radius: 8px;
     padding: 14px 44px;
