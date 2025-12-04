@@ -1,6 +1,83 @@
 <template>
-  <div class="feedback-form-container">
-    <form class="feedback-form" @submit.prevent="submitForm">
+  <div class="feedback-wrapper">
+    <transition name="fade" v-if="isMobile">
+      <div>
+        <h2>Форма обратной связи</h2>
+        <div v-if="step === 1" key="step1" class="feedback-mobile-step">
+          <BaseInput
+            class="feedback-form__input"
+            v-model="name"
+            label="ФИО"
+            placeholder="Иван Иванов"
+            required
+            :error="errors.name"
+          />
+          <BaseInput
+            class="feedback-form__input"
+            v-model="email"
+            label="Почта"
+            placeholder="Введите email"
+            required
+            :error="errors.email"
+          />
+          <BaseInput
+            class="feedback-form__input"
+            v-model="phone"
+            type="phone"
+            label="Номер телефона"
+            placeholder="+7 (000) 000 00 00"
+            required
+            :error="errors.phone"
+            @input="maskPhone"
+          />
+
+          <div class="actions">
+            <BaseButton type="secondary" @click="resetForm">
+              Отменить
+            </BaseButton>
+            <BaseButton type="primary" @click="nextStep"> Далее </BaseButton>
+          </div>
+        </div>
+
+        <div v-else-if="step === 2" key="step2" class="feedback-mobile-step">
+          <RatingStars v-model:rating="userRating" />
+
+          <BaseSelect
+            class="feedback-form__select"
+            v-model="selectedOption"
+            id="experience"
+            label="Грейд"
+            :options="selectOptions"
+            :error="errors.selectedOption"
+            required
+          />
+
+          <BaseInput
+            class="feedback-form__textarea"
+            v-model="additionalInfo"
+            type="textarea"
+            label="Дополнительная информация"
+            placeholder="Что понравилось и не понравилось"
+          />
+
+          <div class="actions">
+            <BaseButton type="secondary" @click="prevStep">Назад</BaseButton>
+            <BaseButton type="primary" @click="submitForm"
+              >Отправить</BaseButton
+            >
+          </div>
+        </div>
+
+        <div>
+          <FormStepper
+            :filledFields="filledFieldsCount"
+            :totalFields="totalFields"
+          />
+        </div>
+      </div>
+    </transition>
+
+    <form v-else class="feedback-form" @submit.prevent="submitForm">
       <div class="feedback-form__header">
         <h2 class="feedback-form__title">Форма обратной связи</h2>
         <RatingStars
@@ -74,18 +151,13 @@
           Отправить
         </BaseButton>
       </div>
-      <div class="feedback-form__stepper">
-        <FormStepper
-          :filledFields="filledFieldsCount"
-          :totalFields="totalFields"
-        />
-      </div>
     </form>
   </div>
 </template>
 
 <script setup>
   import { ref, reactive, computed } from 'vue';
+  import { useMediaQuery } from '@vueuse/core';
 
   import FormStepper from './FormStepper.vue';
   import BaseButton from './basic/Button.vue';
@@ -93,6 +165,8 @@
   import BaseInput from './basic/Input.vue';
   import BaseSelect from './basic/Select.vue';
 
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const step = ref(1);
   const emit = defineEmits(['submit', 'close']);
 
   const name = ref('');
@@ -149,6 +223,28 @@
     return !Object.values(errors).some(Boolean);
   };
 
+  const maskPhone = () => {
+    const digits = phone.value.replace(/\D/g, '').slice(0, 11);
+    if (!digits) return;
+
+    phone.value =
+      '+7 (' +
+      digits.slice(1, 4) +
+      ') ' +
+      digits.slice(4, 7) +
+      ' ' +
+      digits.slice(7, 9) +
+      ' ' +
+      digits.slice(9, 11);
+  };
+
+  const nextStep = () => {
+    step.value = 2;
+  };
+  const prevStep = () => {
+    step.value = 1;
+  };
+
   const submitForm = () => {
     // if (!validateForm()) return;
 
@@ -165,7 +261,9 @@
   };
 
   const resetForm = () => {
-    emit('close');
+    if (isMobile & (step.value === 2)) {
+      step.value = 1;
+    } else emit('close');
     name.value = '';
     email.value = '';
     phone.value = '';
@@ -253,6 +351,40 @@
   .feedback-form-container {
     @media (max-width: 768px) {
       padding: 16px;
+    }
+  }
+
+  .feedback-mobile-step {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+    }
+  }
+
+  .quick-answers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .quick-answer {
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    cursor: pointer;
+
+    &.active {
+      background: #ffd966;
+      border-color: #ffaa00;
     }
   }
 </style>
