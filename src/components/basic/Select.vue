@@ -46,47 +46,47 @@
 </template>
 
 <script setup>
-  import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 
-  const props = defineProps({
-    modelValue: { type: [String, Number], default: '' },
-    label: { type: String, default: '' },
-    placeholder: { type: String, default: 'Выберите' },
-    options: { type: Array, default: () => [] },
-  });
+const props = defineProps({
+  modelValue: { type: [String, Number], default: '' },
+  label: { type: String, default: '' },
+  placeholder: { type: String, default: 'Выберите' },
+  options: { type: Array, default: () => [] },
+});
 
-  const emit = defineEmits(['update:modelValue']);
-  const isOpen = ref(false);
-  const selectRef = ref(null);
+const emit = defineEmits(['update:modelValue']);
+const isOpen = ref(false);
+const selectRef = ref(null);
 
-  const toggleDropdown = () => {
-    isOpen.value = !isOpen.value;
-  };
+const toggleDropdown = () => {
+  isOpen.value = !isOpen.value;
+};
 
-  const select = (value) => {
-    emit('update:modelValue', value);
+const select = (value) => {
+  emit('update:modelValue', value);
+  isOpen.value = false;
+};
+
+const selectedLabel = computed(() => {
+  const item = props.options.find((o) => o.value === props.modelValue);
+  return item ? item.label : '';
+});
+
+const filteredOptions = computed(() =>
+  props.options.filter((o) => o.value !== ''),
+);
+
+const handleClickOutside = (e) => {
+  if (selectRef.value && !selectRef.value.contains(e.target)) {
     isOpen.value = false;
-  };
+  }
+};
 
-  const selectedLabel = computed(() => {
-    const item = props.options.find((o) => o.value === props.modelValue);
-    return item ? item.label : '';
-  });
-
-  const filteredOptions = computed(() =>
-    props.options.filter((o) => o.value !== ''),
-  );
-
-  const handleClickOutside = (e) => {
-    if (selectRef.value && !selectRef.value.contains(e.target)) {
-      isOpen.value = false;
-    }
-  };
-
-  onMounted(() => document.addEventListener('click', handleClickOutside));
-  onBeforeUnmount(() =>
-    document.removeEventListener('click', handleClickOutside),
-  );
+onMounted(() => document.addEventListener('click', handleClickOutside));
+onBeforeUnmount(() =>
+  document.removeEventListener('click', handleClickOutside),
+);
 </script>
 
 <style scoped lang="scss">
@@ -116,6 +116,9 @@
       cursor: pointer;
       transition: border 0.2s ease;
 
+      @media (max-width: 768px) {
+        padding: 9px 16px;
+      }
       &--open {
         border: 1px solid var(--color-primary1);
 

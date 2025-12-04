@@ -19,7 +19,10 @@
 
     <div class="error-form__actions">
       <BaseButton type="secondary" @click="resetForm">Закрыть</BaseButton>
-      <BaseButton type="primary" @click="submitForm">Попробовать снова</BaseButton>
+      <BaseButton type="primary"
+                  @click="submitForm"
+      >Попробовать снова</BaseButton
+      >
     </div>
   </form>
 </template>
@@ -41,115 +44,115 @@ const resetForm = () => {
 </script>
 
 <style lang="scss">
-.error-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 95px;
-
-  &__content {
+  .error-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 95px;
-    text-align: center;
-  }
-
-  &__title {
-    margin-top: 24px;
-  }
-
-  &__subtitle {
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--color-neutral-600);
-  }
-
-  &__icon {
-    display: block;
-  }
-
-  &__actions {
-    display: flex;
-    gap: 28px;
-  }
-
-  @media (max-width: 768px) {
-    gap: 50px;
 
     &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 95px;
+      text-align: center;
+    }
+
+    &__title {
+      margin-top: 24px;
+    }
+
+    &__subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-neutral-600);
+    }
+
+    &__icon {
+      display: block;
+    }
+
+    &__actions {
+      display: flex;
+      gap: 28px;
+    }
+
+    @media (max-width: 768px) {
       gap: 50px;
+
+      &__content {
+        gap: 50px;
+      }
+
+      &__title {
+        font-size: 28px;
+      }
+
+      &__subtitle {
+        font-size: 15px;
+      }
+
+      &__icon {
+        width: 140px;
+        height: 125px;
+      }
+
+      &__actions {
+        gap: 20px;
+      }
     }
 
-    &__title {
-      font-size: 28px;
-    }
-
-    &__subtitle {
-      font-size: 15px;
-    }
-
-    &__icon {
-      width: 140px;
-      height: 125px;
-    }
-
-    &__actions {
-      gap: 20px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    gap: 30px;
-
-    &__content {
+    @media (max-width: 480px) {
       gap: 30px;
+
+      &__content {
+        gap: 30px;
+      }
+
+      &__title {
+        font-size: 24px;
+      }
+
+      &__subtitle {
+        font-size: 14px;
+      }
+
+      &__icon {
+        width: 120px;
+        height: 110px;
+      }
+
+      &__actions {
+        flex-direction: column;
+        gap: 16px;
+      }
     }
 
-    &__title {
-      font-size: 24px;
-    }
-
-    &__subtitle {
-      font-size: 14px;
-    }
-
-    &__icon {
-      width: 120px;
-      height: 110px;
-    }
-
-    &__actions {
-      flex-direction: column;
-      gap: 16px;
-    }
-  }
-
-  @media (max-width: 320px) {
-    gap: 20px;
-
-    &__content {
+    @media (max-width: 320px) {
       gap: 20px;
-    }
 
-    &__title {
-      font-size: 18px;
-    }
+      &__content {
+        gap: 20px;
+      }
 
-    &__subtitle {
-      font-size: 12px;
-    }
+      &__title {
+        font-size: 18px;
+      }
 
-    &__icon {
-      width: 100px;
-      height: 90px;
-    }
+      &__subtitle {
+        font-size: 12px;
+      }
 
-    &__actions {
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
+      &__icon {
+        width: 100px;
+        height: 90px;
+      }
+
+      &__actions {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+      }
     }
   }
-}
 </style>

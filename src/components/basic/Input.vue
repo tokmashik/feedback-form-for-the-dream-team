@@ -96,6 +96,12 @@
       font-size: 12px;
       margin-top: 4px;
     }
+
+    @media (max-width: 768px) {
+      &__field {
+        padding: 10px 16px;
+      }
+    }
   }
 
   .base-input__field::selection,
