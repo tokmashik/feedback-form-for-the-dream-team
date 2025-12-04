@@ -2,16 +2,16 @@
   <div id="app">
     <router-view />
 
-    <ModalWrapper v-if="currentRoute === '/feedback'">
-      <FeedbackForm @submit="goRandom" @close="goHome" />
+    <ModalWrapper @close="closeModal" v-if="currentRoute === '/feedback'">
+      <FeedbackForm @submit="goRandom" @close="closeModal" />
     </ModalWrapper>
 
-    <ModalWrapper v-if="currentRoute === '/success'">
-      <SuccessForm @close="goHome" />
+    <ModalWrapper @close="closeModal" v-if="currentRoute === '/success'">
+      <SuccessForm @close="closeModal" />
     </ModalWrapper>
 
-    <ModalWrapper v-if="currentRoute === '/error'">
-      <ErrorScreen @close="goHome" @submit="goRandom" />
+    <ModalWrapper @close="closeModal" v-if="currentRoute === '/error'">
+      <ErrorScreen @close="closeModal" @submit="goRandom" />
     </ModalWrapper>
   </div>
 </template>
@@ -30,7 +30,7 @@
 
   const currentRoute = computed(() => route.path);
 
-  const goHome = () => router.push('/');
+  const closeModal = () => router.push('/');
 
   // Так как нам нужно отобразить 2 вида формы, то рандомно просто показываем одну из них
   const goRandom = () => {

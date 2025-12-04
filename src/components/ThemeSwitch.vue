@@ -2,19 +2,10 @@
   <button class="button-toggle-theme" @click="toggleTheme">
     <transition name="fade">
       <BasicIcon
-        v-if="isDark"
-        key="sun"
+        :key="isDark ? 'sun' : 'moon'"
         width="24"
         height="24"
-        name="sun"
-        class="button-toggle-theme__icon"
-      />
-      <BasicIcon
-        v-else
-        key="moon"
-        width="24"
-        height="24"
-        name="moon"
+        :name="isDark ? 'sun' : 'moon'"
         class="button-toggle-theme__icon"
       />
     </transition>
@@ -39,8 +30,7 @@
   };
 
   onMounted(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    if (localStorage.getItem('theme') === 'dark') {
       isDark.value = true;
       document.body.classList.add('dark-theme');
     }
@@ -64,14 +54,22 @@
     }
   }
 
-  /* Плавная анимация иконок при тыке */
+  /* Анимация для входа и выхода */
   .fade-enter-active,
   .fade-leave-active {
     transition: all 0.4s ease;
   }
-  .fade-enter {
+  .fade-enter-from {
     opacity: 0;
     transform: translateY(-30%);
+  }
+  .fade-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-leave-from {
+    opacity: 1;
+    transform: translateY(0);
   }
   .fade-leave-to {
     opacity: 0;
