@@ -1,27 +1,30 @@
 <template>
-  <div class="feedback-wrapper">
+  <div class="feedback">
     <transition name="fade" v-if="isMobile">
-      <div>
-        <h2>Форма обратной связи</h2>
-        <div v-if="step === 1" key="step1" class="feedback-mobile-step">
+      <div class="feedback__mobile" :key="step">
+        <h2 class="feedback__title">Форма обратной связи</h2>
+
+        <div v-if="step === 1" class="feedback__mobile-step">
           <BaseInput
-            class="feedback-form__input"
+            class="feedback__input"
             v-model="name"
             label="ФИО"
             placeholder="Иван Иванов"
             required
             :error="errors.name"
           />
+
           <BaseInput
-            class="feedback-form__input"
+            class="feedback__input"
             v-model="email"
             label="Почта"
             placeholder="Введите email"
             required
             :error="errors.email"
           />
+
           <BaseInput
-            class="feedback-form__input"
+            class="feedback__input"
             v-model="phone"
             type="phone"
             label="Номер телефона"
@@ -31,19 +34,17 @@
             @input="maskPhone"
           />
 
-          <div class="actions">
-            <BaseButton type="secondary" @click="resetForm">
-              Отменить
-            </BaseButton>
-            <BaseButton type="primary" @click="nextStep"> Далее </BaseButton>
+          <div class="feedback__mobile-actions">
+            <BaseButton type="secondary" @click="resetForm">Отменить</BaseButton>
+            <BaseButton type="primary" @click="nextStep">Далее</BaseButton>
           </div>
         </div>
 
-        <div v-else-if="step === 2" key="step2" class="feedback-mobile-step">
+        <div v-else-if="step === 2" class="feedback__mobile-step">
           <RatingStars v-model:rating="userRating" />
 
           <BaseSelect
-            class="feedback-form__select"
+            class="feedback__select"
             v-model="selectedOption"
             id="experience"
             label="Грейд"
@@ -53,51 +54,51 @@
           />
 
           <BaseInput
-            class="feedback-form__textarea"
+            class="feedback__textarea"
             v-model="additionalInfo"
             type="textarea"
             label="Дополнительная информация"
             placeholder="Что понравилось и не понравилось"
           />
 
-          <div class="actions">
+          <div class="feedback__mobile-actions">
             <BaseButton type="secondary" @click="prevStep">Назад</BaseButton>
-            <BaseButton type="primary" @click="submitForm"
-              >Отправить</BaseButton
-            >
+            <BaseButton type="primary" @click="submitForm">Отправить</BaseButton>
           </div>
         </div>
 
-        <div>
-          <FormStepper
-            :filledFields="filledFieldsCount"
-            :totalFields="totalFields"
-          />
-        </div>
+        <FormStepper
+          class="feedback__stepper"
+          :filledFields="filledFieldsCount"
+          :totalFields="totalFields"
+        />
       </div>
     </transition>
 
-    <form v-else class="feedback-form" @submit.prevent="submitForm">
-      <div class="feedback-form__header">
-        <h2 class="feedback-form__title">Форма обратной связи</h2>
+    <form v-else class="feedback__form" @submit.prevent="submitForm">
+
+      <div class="feedback__header">
+        <h2 class="feedback__title">Форма обратной связи</h2>
+
         <RatingStars
-          class="feedback-form__rating"
+          class="feedback__rating"
           v-model:rating="userRating"
           v-model:adjectives="userAdjectives"
         />
       </div>
 
-      <div class="feedback-form__row">
+      <div class="feedback__row">
         <BaseInput
-          class="feedback-form__input"
+          class="feedback__input"
           v-model="name"
           label="ФИО"
           placeholder="Иван Иванов"
           required
           :error="errors.name"
         />
+
         <BaseInput
-          class="feedback-form__input"
+          class="feedback__input"
           v-model="email"
           label="Почта"
           placeholder="Введите email"
@@ -106,18 +107,20 @@
         />
       </div>
 
-      <div class="feedback-form__row">
+      <div class="feedback__row">
         <BaseInput
-          class="feedback-form__input"
+          class="feedback__input"
           v-model="phone"
           type="phone"
           label="Номер телефона"
           placeholder="+7 (000) 000 00 00"
           required
           :error="errors.phone"
+          @input="maskPhone"
         />
+
         <BaseSelect
-          class="feedback-form__select"
+          class="feedback__select"
           id="experience"
           label="Грейд"
           v-model="selectedOption"
@@ -128,263 +131,230 @@
       </div>
 
       <BaseInput
-        class="feedback-form__textarea"
+        class="feedback__textarea"
         v-model="additionalInfo"
         type="textarea"
         label="Дополнительная информация"
         placeholder="Что понравилось и не понравилось"
       />
 
-      <div class="feedback-form__actions">
-        <BaseButton
-          class="feedback-form__button"
-          type="secondary"
-          @click="resetForm"
-        >
-          Отменить
-        </BaseButton>
-        <BaseButton
-          class="feedback-form__button"
-          type="primary"
-          @click="submitForm"
-        >
-          Отправить
-        </BaseButton>
+
+      <div class="feedback__actions">
+        <BaseButton type="secondary" @click="resetForm">Отменить</BaseButton>
+        <BaseButton type="primary" @click="submitForm">Отправить</BaseButton>
       </div>
     </form>
   </div>
 </template>
 
 <script setup>
-  import { ref, reactive, computed } from 'vue';
-  import { useMediaQuery } from '@vueuse/core';
+import { ref, reactive, computed } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
 
-  import FormStepper from './FormStepper.vue';
-  import BaseButton from './basic/Button.vue';
-  import RatingStars from './RatingStars.vue';
-  import BaseInput from './basic/Input.vue';
-  import BaseSelect from './basic/Select.vue';
+import FormStepper from './FormStepper.vue';
+import BaseButton from './basic/Button.vue';
+import RatingStars from './RatingStars.vue';
+import BaseInput from './basic/Input.vue';
+import BaseSelect from './basic/Select.vue';
 
-  const isMobile = useMediaQuery('(max-width: 768px)');
-  const step = ref(1);
-  const emit = defineEmits(['submit', 'close']);
+const emit = defineEmits(['submit', 'close']);
+const isMobile = useMediaQuery('(max-width: 768px)');
+const step = ref(1);
 
-  const name = ref('');
-  const email = ref('');
-  const phone = ref('');
-  const selectedOption = ref('');
-  const additionalInfo = ref('');
-  const userRating = ref(0);
-  const userAdjectives = ref([]);
+const name = ref('');
+const email = ref('');
+const phone = ref('');
+const selectedOption = ref('');
+const additionalInfo = ref('');
+const userRating = ref(0);
+const userAdjectives = ref([]);
 
-  const totalFields = 4;
+const errors = reactive({
+  name: '',
+  email: '',
+  phone: '',
+  selectedOption: '',
+});
 
-  const filledFieldsCount = computed(() => {
-    let count = 0;
-    if (name.value) count++;
-    if (email.value) count++;
-    if (phone.value) count++;
-    if (selectedOption.value) count++;
-    return count;
+const totalFields = 4;
+
+const filledFieldsCount = computed(() => {
+  return [name.value, email.value, phone.value, selectedOption.value].filter(Boolean).length;
+});
+
+const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+const isFullNameValid = (fullName) => {
+  const parts = fullName.trim().split(/\s+/);
+  return parts.length === 3 && parts.every((w) => /^[A-Za-zА-Яа-яЁё-]{2,}$/.test(w));
+};
+
+const validateForm = () => {
+  errors.name = name.value ? (isFullNameValid(name.value) ? '' : 'ФИО должно состоять из трёх слов') : 'ФИО обязательно';
+  errors.email = email.value ? (isValidEmail(email.value) ? '' : 'Неверный email') : 'Email обязателен';
+  errors.phone = phone.value ? '' : 'Телефон обязателен';
+  errors.selectedOption = selectedOption.value ? '' : 'Выберите грейд';
+
+  return Object.values(errors).every((v) => !v);
+};
+
+const maskPhone = () => {
+  const digits = phone.value.replace(/\D/g, '').slice(0, 11);
+
+  if (!digits) {
+    phone.value = '+7 (';
+    return;
+  }
+
+  phone.value =
+    '+7 (' +
+    digits.slice(1, 4) +
+    ') ' +
+    digits.slice(4, 7) +
+    ' ' +
+    digits.slice(7, 9) +
+    ' ' +
+    digits.slice(9, 11);
+};
+
+const nextStep = () => {
+  // if (validateForm()) 
+  step.value = 2;
+};
+
+const prevStep = () => {
+  step.value = 1;
+};
+
+const submitForm = () => {
+  // if (!validateForm()) return;
+
+  console.log({
+    name: name.value,
+    email: email.value,
+    phone: phone.value,
+    selectedOption: selectedOption.value,
+    additionalInfo: additionalInfo.value,
+    rating: userRating.value,
+    adjectives: userAdjectives.value,
   });
+  emit('submit');
+};
 
-  const errors = reactive({
-    name: '',
-    email: '',
-    phone: '',
-    selectedOption: '',
-  });
-
-  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const isFullNameValid = (fullName) => {
-    const parts = fullName.trim().split(/\s+/);
-    return (
-      parts.length === 3 &&
-      parts.every((w) => /^[A-Za-zА-Яа-яЁё-]{2,}$/.test(w))
-    );
-  };
-
-  const validateForm = () => {
-    errors.name = name.value.trim()
-      ? isFullNameValid(name.value)
-        ? ''
-        : 'ФИО должно состоять из 3 слов'
-      : 'ФИО обязательно';
-
-    errors.email = email.value.trim()
-      ? isValidEmail(email.value)
-        ? ''
-        : 'Неверный формат email'
-      : 'Email обязателен';
-
-    errors.phone = phone.value.trim() ? '' : 'Телефон обязателен';
-    errors.selectedOption = selectedOption.value ? '' : 'Выберите грейд';
-
-    return !Object.values(errors).some(Boolean);
-  };
-
-  const maskPhone = () => {
-    const digits = phone.value.replace(/\D/g, '').slice(0, 11);
-    if (!digits) return;
-
-    phone.value =
-      '+7 (' +
-      digits.slice(1, 4) +
-      ') ' +
-      digits.slice(4, 7) +
-      ' ' +
-      digits.slice(7, 9) +
-      ' ' +
-      digits.slice(9, 11);
-  };
-
-  const nextStep = () => {
-    step.value = 2;
-  };
-  const prevStep = () => {
+const resetForm = () => {
+  if (isMobile.value && step.value === 2) {
     step.value = 1;
-  };
+    return;
+  }
+  emit('close');
+  step.value = 1;
 
-  const submitForm = () => {
-    // if (!validateForm()) return;
+  name.value =
+    email.value =
+    phone.value =
+    selectedOption.value =
+    additionalInfo.value =
+      '';
+  userRating.value = 0;
+  userAdjectives.value = [];
 
-    console.log({
-      name: name.value,
-      email: email.value,
-      phone: phone.value,
-      selectedOption: selectedOption.value,
-      additionalInfo: additionalInfo.value,
-      rating: userRating.value,
-      adjectives: userAdjectives.value,
-    });
-    emit('submit');
-  };
+  Object.keys(errors).forEach((k) => (errors[k] = ''));
+};
 
-  const resetForm = () => {
-    if (isMobile & (step.value === 2)) {
-      step.value = 1;
-    } else emit('close');
-    name.value = '';
-    email.value = '';
-    phone.value = '';
-    selectedOption.value = '';
-    additionalInfo.value = '';
-    userRating.value = 0;
-    userAdjectives.value = [];
-    Object.keys(errors).forEach((key) => (errors[key] = ''));
-  };
-
-  const selectOptions = [
-    { value: '', label: 'Выберите' },
-    { value: 'junior', label: 'Junior' },
-    { value: 'middle', label: 'Middle' },
-    { value: 'senior', label: 'Senior' },
-    { value: 'team_lead', label: 'Team Lead' },
-  ];
+const selectOptions = [
+  { value: '', label: 'Выберите' },
+  { value: 'junior', label: 'Junior' },
+  { value: 'middle', label: 'Middle' },
+  { value: 'senior', label: 'Senior' },
+  { value: 'team_lead', label: 'Team Lead' },
+];
 </script>
 
 <style lang="scss">
-  .feedback-form {
+.feedback {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+
+  &__title {
+    margin-bottom: 16px;
+  }
+
+  &__form,
+  &__mobile {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    max-width: 800px;
-    margin: 0 auto;
+    gap: 24px;
+  }
 
-    &__header {
-      display: flex;
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 24px;
+
+    @media (max-width: 768px) {
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
+  }
 
-    &__row {
-      display: flex;
-      gap: 28px;
-      max-width: 549px;
+  &__input,
+  &__select,
+  &__textarea {
+    flex: 1;
+  }
 
-      @media (max-width: 768px) {
-        flex-direction: column;
-        gap: 16px;
-        max-width: 100%;
-      }
-    }
+  &__actions,
+  &__mobile-actions {
+    display: flex;
+    gap: 20px;
 
-    &__input,
-    &__select,
-    &__textarea {
-      flex: 1;
-    }
-
-    &__actions {
-      display: flex;
-      gap: 28px;
-
-      @media (max-width: 768px) {
+    @media (max-width: 768px) {
         justify-content: center;
         gap: 8px;
         width: 100%;
       }
 
-      @media (max-width: 480px) {
-        flex-direction: column;
-        gap: 16px;
-      }
-    }
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 16px;
 
-    &__button {
-      min-width: 120px;
-
-      @media (max-width: 480px) {
-        width: 100%;
-      }
-    }
-
-    &__stepper {
-      display: none;
-
-      @media (max-width: 480px) {
-        display: block;
-      }
+      width: 100%;
     }
   }
 
-  .feedback-form-container {
-    @media (max-width: 768px) {
-      padding: 16px;
-    }
-  }
-
-  .feedback-mobile-step {
+  &__mobile-step {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
 
-  .actions {
-    display: flex;
-    gap: 16px;
-
-    @media (max-width: 480px) {
-      flex-direction: column;
-    }
-  }
-
-  .quick-answers {
+  &__quick-answers {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
 
-  .quick-answer {
-    padding: 8px 16px;
+  &__quick-answer {
+    padding: 8px 14px;
     border-radius: 12px;
     border: 1px solid #ddd;
-    background: #f5f5f5;
+    background: #f6f6f6;
     cursor: pointer;
+    font-size: 14px;
 
-    &.active {
-      background: #ffd966;
-      border-color: #ffaa00;
+    &--active {
+      background: #ffe08a;
+      border-color: #f2b400;
     }
   }
+
+  &__stepper {
+    margin-top: auto;
+  }
+}
 </style>
