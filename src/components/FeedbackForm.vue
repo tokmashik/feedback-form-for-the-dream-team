@@ -1,10 +1,10 @@
 <template>
   <div class="feedback">
-    <transition name="fade" v-if="isMobile">
+    <dev name="fade" v-if="isMobile">
       <div class="feedback__mobile" :key="step">
         <h1 class="feedback__title">Форма обратной связи</h1>
 
-        <div v-if="step === 1" class="feedback__mobile-step">
+        <div v-show="step === 1" class="feedback__mobile-step">
           <BaseInput
             class="feedback__input"
             v-model="name"
@@ -43,7 +43,7 @@
           </div>
         </div>
 
-        <div v-else-if="step === 2" class="feedback__mobile-step">
+        <div v-show="step === 2" class="feedback__mobile-step">
           <RatingStars v-model:rating="userRating" />
 
           <BaseSelect
@@ -79,7 +79,7 @@
           :totalFields="totalFields"
         />
       </div>
-    </transition>
+    </dev>
 
     <form v-else class="feedback__form" @submit.prevent="submitForm">
       <div class="feedback__header">
@@ -153,7 +153,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, watch } from 'vue';
 import { useMediaQuery } from '@vueuse/core';
 
 import FormStepper from './FormStepper.vue';
@@ -198,6 +198,14 @@ const isFullNameValid = (fullName) => {
   );
 };
 
+watch(name, (newVal) => {
+  if (!newVal) return;
+  name.value = newVal
+    .split(' ')
+    .map(word => word ? word[0].toUpperCase() + word.slice(1) : '')
+    .join(' ');
+});
+
 const validateForm = () => {
   errors.name = name.value
     ? isFullNameValid(name.value)
@@ -210,7 +218,6 @@ const validateForm = () => {
       : 'Неверный email'
     : 'Email обязателен';
   errors.phone = phone.value ? '' : 'Телефон обязателен';
-  errors.selectedOption = selectedOption.value ? '' : 'Выберите грейд';
 
   return Object.values(errors).every((v) => !v);
 };
@@ -235,8 +242,7 @@ const maskPhone = () => {
 };
 
 const nextStep = () => {
-  // if (validateForm())
-  step.value = 2;
+  if (validateForm()) step.value = 2;
 };
 
 const prevStep = () => {
@@ -244,7 +250,7 @@ const prevStep = () => {
 };
 
 const submitForm = () => {
-  // if (!validateForm()) return;
+  if (!validateForm()) return;
 
   console.log({
     name: name.value,
