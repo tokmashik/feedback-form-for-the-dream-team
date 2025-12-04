@@ -67,6 +67,7 @@
     }
 
     &__field {
+      font-family: "DM Sans", sans-serif;
       padding: 14px 16px;
       border-radius: 8px;
       background: var(--color-neutral-200);
