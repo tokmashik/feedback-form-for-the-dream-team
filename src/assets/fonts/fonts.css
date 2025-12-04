@@ -16,15 +16,6 @@
   font-display: swap;
 }
 
-/* DM Sans SemiBold (600) */
-@font-face {
-  font-family: 'DM Sans';
-  src: url('@/assets/fonts/DMSans-SemiBold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* DM Sans Bold (700) */
 @font-face {
   font-family: 'DM Sans';
