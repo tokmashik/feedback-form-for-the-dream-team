@@ -56,7 +56,6 @@ const resetForm = () => {
   }
 
   &__title {
-    margin: 0;
     margin-top: 24px;
   }
 
@@ -75,12 +74,6 @@ const resetForm = () => {
     gap: 28px;
   }
 
-  &__support {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
   @media (max-width: 768px) {
     gap: 50px;
 
@@ -97,8 +90,8 @@ const resetForm = () => {
     }
 
     &__icon {
-      width: 140px !important;
-      height: 125px !important;
+      width: 140px;
+      height: 125px;
     }
 
     &__actions {
@@ -122,8 +115,8 @@ const resetForm = () => {
     }
 
     &__icon {
-      width: 120px !important;
-      height: 110px !important;
+      width: 120px;
+      height: 110px;
     }
 
     &__actions {
@@ -148,8 +141,8 @@ const resetForm = () => {
     }
 
     &__icon {
-      width: 100px !important;
-      height: 90px !important;
+      width: 100px;
+      height: 90px;
     }
 
     &__actions {

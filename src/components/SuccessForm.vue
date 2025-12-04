@@ -84,8 +84,8 @@ const submitForm = () => {
     }
 
     &__icon {
-      width: 140px !important;
-      height: 125px !important;
+      width: 140px;
+      height: 125px;
     }
 
     &__button {
@@ -94,6 +94,7 @@ const submitForm = () => {
   }
 
   @media (max-width: 480px) {
+    gap: 30px;
 
     &__content {
       gap: 30px;
@@ -108,8 +109,8 @@ const submitForm = () => {
     }
 
     &__icon {
-      width: 120px !important;
-      height: 110px !important;
+      width: 120px;
+      height: 110px;
     }
 
     &__button {
@@ -134,8 +135,8 @@ const submitForm = () => {
     }
 
     &__icon {
-      width: 100px !important;
-      height: 90px !important;
+      width: 100px;
+      height: 90px;
     }
 
     &__button {

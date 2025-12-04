@@ -59,12 +59,13 @@ defineEmits(['click']);
 
     @media (max-width: 768px) {
       height: 50px;
+      padding: 10px;
       gap: 8px;
     }
 
     @media (max-width: 480px) {
       height: 44px;
-      padding: 10px 8px;
+      padding: 6px;
       gap: 8px;
       font-size: 14px;
       line-height: 20px;
