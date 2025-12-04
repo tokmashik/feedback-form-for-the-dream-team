@@ -31,7 +31,7 @@
             placeholder="+7 (000) 000 00 00"
             required
             :error="errors.phone"
-            @input="maskPhone"
+            @input="onPhoneInput($event.target.value)"
           />
 
           <div class="feedback__mobile-actions">
@@ -44,7 +44,10 @@
         </div>
 
         <div v-show="step === 2" class="feedback__mobile-step">
-          <RatingStars v-model:rating="userRating" />
+          <RatingStars
+            v-model:rating="userRating"
+            v-model:adjectives="userAdjectives"
+          />
 
           <BaseSelect
             class="feedback__select"
@@ -121,7 +124,7 @@
           placeholder="+7 (000) 000 00 00"
           required
           :error="errors.phone"
-          @input="maskPhone"
+          @input="onPhoneInput($event.target.value)"
         />
 
         <BaseSelect
@@ -162,6 +165,8 @@ import RatingStars from './RatingStars.vue';
 import BaseInput from './basic/Input.vue';
 import BaseSelect from './basic/Select.vue';
 
+import { maskPhone } from '@/utils/phoneMask';
+import { isValidEmail, isFullNameValid, isValidPhone } from '@/utils/validation';
 const emit = defineEmits(['submit', 'close']);
 const isMobile = useMediaQuery('(max-width: 768px)');
 const step = ref(1);
@@ -189,22 +194,16 @@ const filledFieldsCount = computed(() => {
   ).length;
 });
 
-const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-const isFullNameValid = (fullName) => {
-  const parts = fullName.trim().split(/\s+/);
-  return (
-    parts.length === 3 &&
-      parts.every((w) => /^[A-Za-zА-Яа-яЁё-]{2,}$/.test(w))
-  );
-};
-
-watch(name, (newVal) => {
-  if (!newVal) return;
-  name.value = newVal
+watch(name, (v) => {
+  name.value = v
     .split(' ')
-    .map(word => word ? word[0].toUpperCase() + word.slice(1) : '')
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : ''))
     .join(' ');
 });
+
+const onPhoneInput = (val) => {
+  phone.value = maskPhone(val);
+};
 
 const validateForm = () => {
   errors.name = name.value
@@ -215,30 +214,16 @@ const validateForm = () => {
   errors.email = email.value
     ? isValidEmail(email.value)
       ? ''
-      : 'Неверный email'
-    : 'Email обязателен';
-  errors.phone = phone.value ? '' : 'Телефон обязателен';
+      : 'Неверная почта'
+    : 'Почта обязательна';
 
-  return Object.values(errors).every((v) => !v);
-};
+  errors.phone = phone.value
+    ? isValidPhone(phone.value)
+      ? ''
+      : 'Некорректный номер'
+    : 'Телефон обязателен';
 
-const maskPhone = () => {
-  const digits = phone.value.replace(/\D/g, '').slice(0, 11);
-
-  if (!digits) {
-    phone.value = '+7 (';
-    return;
-  }
-
-  phone.value =
-      '+7 (' +
-      digits.slice(1, 4) +
-      ') ' +
-      digits.slice(4, 7) +
-      ' ' +
-      digits.slice(7, 9) +
-      ' ' +
-      digits.slice(9, 11);
+  return Object.values(errors).every((x) => !x);
 };
 
 const nextStep = () => {
