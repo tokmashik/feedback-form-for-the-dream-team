@@ -32,18 +32,18 @@
 </template>
 
 <script setup>
-  defineProps({
-    modelValue: { type: [String, Number], default: '' },
-    placeholder: { type: String, default: '' },
-    type: { type: String, default: 'text' },
-    label: { type: String, default: '' },
-    id: { type: String, default: '' },
-    disabled: { type: Boolean, default: false },
-    error: { type: String, default: '' },
-    required: { type: Boolean, default: false },
-  });
+defineProps({
+  modelValue: { type: [String, Number], default: '' },
+  placeholder: { type: String, default: '' },
+  type: { type: String, default: 'text' },
+  label: { type: String, default: '' },
+  id: { type: String, default: '' },
+  disabled: { type: Boolean, default: false },
+  error: { type: String, default: '' },
+  required: { type: Boolean, default: false },
+});
 
-  defineEmits(['update:modelValue']);
+defineEmits(['update:modelValue']);
 </script>
 
 <style scoped lang="scss">
@@ -59,6 +59,7 @@
       color: var(--color-neutral-600);
       display: flex;
       justify-content: flex-start;
+      user-select: none;
     }
 
     &__required {

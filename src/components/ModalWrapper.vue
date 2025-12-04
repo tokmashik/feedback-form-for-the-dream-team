@@ -27,9 +27,6 @@ import ThemeSwitch from './ThemeSwitch.vue';
     justify-content: center;
     padding: 16px;
 
-    @media (max-width: 320px) {
-      // padding: 0px;
-    }
     &__content {
       position: relative;
       width: 90%;

@@ -44,73 +44,73 @@
 </template>
 
 <script setup>
-  import { ref, computed } from 'vue';
-  import StarIcon from './StarIcon.vue';
+import { ref, computed } from 'vue';
+import StarIcon from './StarIcon.vue';
 
-  const rating = ref(0);
-  const hoverRating = ref(0);
-  const selectedAdjectives = ref([]);
+const rating = ref(0);
+const hoverRating = ref(0);
+const selectedAdjectives = ref([]);
 
-  const arrayOfPositiveAdjectives = [
-    { code: 'interesting', text: 'Интересно' },
-    { code: 'easy', text: 'Легко' },
-    { code: 'fast_done', text: 'Быстро сделал' },
-    { code: 'beautiful', text: 'Красиво' },
-    { code: 'detailed', text: 'Подробно описано' },
-    { code: 'clear_and_to_the_point', text: 'Все понятно и по делу' },
-  ];
+const arrayOfPositiveAdjectives = [
+  { code: 'interesting', text: 'Интересно' },
+  { code: 'easy', text: 'Легко' },
+  { code: 'fast_done', text: 'Быстро сделал' },
+  { code: 'beautiful', text: 'Красиво' },
+  { code: 'detailed', text: 'Подробно описано' },
+  { code: 'clear_and_to_the_point', text: 'Все понятно и по делу' },
+];
 
-  const arrayOfNegativeAdjectives = [
-    { code: 'unclear', text: 'Не понятно' },
-    { code: 'boring', text: 'Однообразно' },
-    { code: 'dull', text: 'Скучно' },
-    { code: 'inconvenient', text: 'Неудобно' },
-    { code: 'nothing_understood', text: 'Ничего не понял' },
-    { code: 'too_complex', text: 'Слишком сложно для тестового' },
-  ];
+const arrayOfNegativeAdjectives = [
+  { code: 'unclear', text: 'Не понятно' },
+  { code: 'boring', text: 'Однообразно' },
+  { code: 'dull', text: 'Скучно' },
+  { code: 'inconvenient', text: 'Неудобно' },
+  { code: 'nothing_understood', text: 'Ничего не понял' },
+  { code: 'too_complex', text: 'Слишком сложно для тестового' },
+];
 
-  const currentAdjectives = ref([]);
-  const currentGroup = ref(null);
+const currentAdjectives = ref([]);
+const currentGroup = ref(null);
 
-  const ratingGroupKey = computed(() =>
-    rating.value <= 2 ? 'negative' : 'positive',
-  );
+const ratingGroupKey = computed(() =>
+  rating.value <= 2 ? 'negative' : 'positive',
+);
 
-  const emit = defineEmits(['update:rating', 'update:adjectives']);
+const emit = defineEmits(['update:rating', 'update:adjectives']);
 
-  function setRating(value) {
-    rating.value = value;
+function setRating(value) {
+  rating.value = value;
 
-    const newGroup = value <= 2 ? 'negative' : 'positive';
+  const newGroup = value <= 2 ? 'negative' : 'positive';
 
-    if (newGroup !== currentGroup.value) {
-      currentGroup.value = newGroup;
-      currentAdjectives.value =
+  if (newGroup !== currentGroup.value) {
+    currentGroup.value = newGroup;
+    currentAdjectives.value =
         newGroup === 'negative'
           ? arrayOfNegativeAdjectives
           : arrayOfPositiveAdjectives;
 
-      selectedAdjectives.value = []; // сброс выбранных при смене группы
-    }
-
-    emitData();
+    selectedAdjectives.value = []; // сброс выбранных при смене группы
   }
 
-  function toggleAdjective(code) {
-    if (selectedAdjectives.value.includes(code)) {
-      selectedAdjectives.value = selectedAdjectives.value.filter(
-        (c) => c !== code,
-      );
-    } else {
-      selectedAdjectives.value.push(code);
-    }
-    emitData();
-  }
+  emitData();
+}
 
-  function emitData() {
-    emit('update:rating', rating.value);
-    emit('update:adjectives', selectedAdjectives.value);
+function toggleAdjective(code) {
+  if (selectedAdjectives.value.includes(code)) {
+    selectedAdjectives.value = selectedAdjectives.value.filter(
+      (c) => c !== code,
+    );
+  } else {
+    selectedAdjectives.value.push(code);
   }
+  emitData();
+}
+
+function emitData() {
+  emit('update:rating', rating.value);
+  emit('update:adjectives', selectedAdjectives.value);
+}
 </script>
 
 <style lang="scss">
@@ -225,7 +225,6 @@
     }
   }
 
-  /* Плавное появление/исчезновение блока */
   .fade-block-enter-active,
   .fade-block-leave-active {
     transition:

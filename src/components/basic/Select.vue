@@ -103,6 +103,7 @@ onBeforeUnmount(() =>
       color: var(--color-neutral-600);
       font-weight: 400;
       line-height: 20px;
+      user-select: none;
     }
 
     &__box {

@@ -7,9 +7,9 @@
 </template>
 
 <script setup>
-  import BaseButton from '@/components/basic/Button.vue';
-  import { useRouter } from 'vue-router';
+import BaseButton from '@/components/basic/Button.vue';
+import { useRouter } from 'vue-router';
 
-  const router = useRouter();
-  const openFeedback = () => router.push('/feedback');
+const router = useRouter();
+const openFeedback = () => router.push('/feedback');
 </script>
