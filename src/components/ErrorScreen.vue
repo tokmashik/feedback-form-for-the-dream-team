@@ -98,6 +98,8 @@ const resetForm = () => {
       }
 
       &__actions {
+        display: flex;
+        flex-direction: column;
         gap: 20px;
       }
     }
