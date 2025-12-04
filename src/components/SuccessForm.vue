@@ -2,7 +2,7 @@
   <form class="success-form" @submit.prevent="submitForm">
     <div class="success-form__content">
       <div>
-        <h2 class="success-form__title">Спасибо, ваш ответ отправлен</h2>
+        <h1 class="success-form__title">Спасибо, ваш ответ отправлен</h1>
         <div class="success-form__subtitle">
           Свяжемся с вами в ближайшее время
         </div>
@@ -24,79 +24,126 @@
 </template>
 
 <script setup>
-  import BasicIcon from './basic/BasicIcon.vue';
-  import BaseButton from './basic/Button.vue';
+import BasicIcon from './basic/BasicIcon.vue';
+import BaseButton from './basic/Button.vue';
 
-  const emit = defineEmits(['close']);
+const emit = defineEmits(['close']);
 
-  const submitForm = () => {
-    console.log('Форма успешно отправлена');
-    emit('close');
-  };
+const submitForm = () => {
+  console.log('Форма успешно отправлена');
+  emit('close');
+};
 </script>
 
 <style lang="scss">
-  .success-form {
+.success-form {
+  display: flex;
+  flex-direction: column;
+  gap: 95px;
+  align-items: center;
+
+  &__content {
     display: flex;
     flex-direction: column;
-    gap: 95px;
     align-items: center;
+    gap: 95px;
+  }
+
+  &__title {
+    margin-top: 24px;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-neutral-600);
+    text-align: center;
+  }
+
+  &__icon {
+    display: block;
+  }
+
+  &__button {
+    align-self: center;
+    width: 200px;
+  }
+  @media (max-width: 768px) {
+    gap: 50px;
 
     &__content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 95px;
+      gap: 50px;
     }
 
     &__title {
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--color-neutral-800);
-      text-align: center;
-      margin: 0 0 8px 0;
+      font-size: 28px;
     }
 
     &__subtitle {
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-neutral-600);
-      text-align: center;
+      font-size: 15px;
     }
 
     &__icon {
-      display: block;
+      width: 140px !important;
+      height: 125px !important;
     }
 
     &__button {
-      align-self: center;
-      width: 200px;
-    }
-
-    @media (max-width: 480px) {
-      gap: 20px;
-
-      &__content {
-        gap: 20px;
-      }
-
-      &__title {
-        font-size: 24px;
-      }
-
-      &__subtitle {
-        font-size: 14px;
-      }
-
-      &__icon {
-        width: 120px !important;
-        height: 110px !important;
-      }
-
-      &__button {
-        width: 100%;
-        max-width: 260px;
-      }
+      width: 180px;
     }
   }
+
+  @media (max-width: 480px) {
+
+    &__content {
+      gap: 30px;
+    }
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__subtitle {
+      font-size: 14px;
+    }
+
+    &__icon {
+      width: 120px !important;
+      height: 110px !important;
+    }
+
+    &__button {
+      width: 100%;
+      max-width: 260px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    gap: 20px;
+
+    &__content {
+      gap: 20px;
+    }
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__subtitle {
+      font-size: 12px;
+    }
+
+    &__icon {
+      width: 100px !important;
+      height: 90px !important;
+    }
+
+    &__button {
+      width: 100%;
+      max-width: 220px;
+      font-size: 14px;
+      padding: 10px 16px;
+    }
+  }
+}
 </style>

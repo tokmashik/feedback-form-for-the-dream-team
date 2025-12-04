@@ -1,9 +1,11 @@
 <template>
   <form class="error-form" @submit.prevent="submitForm">
     <div class="error-form__content">
-      <h2 class="error-form__title">Что-то пошло не так</h2>
-      <div class="error-form__subtitle p-small">
-        Попробуйте заполнить форму позже
+      <div>
+        <h1 class="error-form__title">Что-то пошло не так</h1>
+        <div class="error-form__subtitle p-small">
+          Попробуйте заполнить форму позже
+        </div>
       </div>
 
       <BasicIcon
@@ -16,85 +18,145 @@
     </div>
 
     <div class="error-form__actions">
-      <BaseButton type="secondary" @click="resetForm"> Закрыть </BaseButton>
-
-      <BaseButton type="primary" @click="submitForm">
-        Попробовать снова
-      </BaseButton>
+      <BaseButton type="secondary" @click="resetForm">Закрыть</BaseButton>
+      <BaseButton type="primary" @click="submitForm">Попробовать снова</BaseButton>
     </div>
-
-    <a class="error-form__support p-small-link" type="button">
-      Обратиться в тех поддержку
-    </a>
   </form>
 </template>
 
 <script setup>
-  import BasicIcon from './basic/BasicIcon.vue';
-  import BaseButton from './basic/Button.vue';
+import BasicIcon from './basic/BasicIcon.vue';
+import BaseButton from './basic/Button.vue';
 
-  const emit = defineEmits(['submit', 'close']);
+const emit = defineEmits(['submit', 'close']);
 
-  const submitForm = () => {
-    console.log('Усп, сломалось. Повторная отправка формы');
-    emit('submit');
-  };
+const submitForm = () => {
+  console.log('Усп, сломалось. Повторная отправка формы');
+  emit('submit');
+};
 
-  const resetForm = () => {
-    emit('close');
-  };
+const resetForm = () => {
+  emit('close');
+};
 </script>
 
 <style lang="scss">
-  .error-form {
+.error-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 95px;
+
+  &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 95px;
+    text-align: center;
+  }
+
+  &__title {
+    margin: 0;
+    margin-top: 24px;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-neutral-600);
+  }
+
+  &__icon {
+    display: block;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 28px;
+  }
+
+  &__support {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    gap: 50px;
 
     &__content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-      text-align: center;
+      gap: 50px;
     }
 
     &__title {
-      margin: 0;
+      font-size: 28px;
+    }
+
+    &__subtitle {
+      font-size: 15px;
     }
 
     &__icon {
-      display: block;
+      width: 140px !important;
+      height: 125px !important;
     }
 
     &__actions {
-      display: flex;
-      gap: 28px;
-    }
-
-    &__support {
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    @media (max-width: 480px) {
       gap: 20px;
-
-      &__content {
-        gap: 20px;
-      }
-
-      &__actions {
-        flex-direction: column;
-        gap: 16px;
-        width: 100%;
-      }
-
-      &__support {
-        margin-top: 8px;
-      }
     }
   }
+
+  @media (max-width: 480px) {
+    gap: 30px;
+
+    &__content {
+      gap: 30px;
+    }
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__subtitle {
+      font-size: 14px;
+    }
+
+    &__icon {
+      width: 120px !important;
+      height: 110px !important;
+    }
+
+    &__actions {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    gap: 20px;
+
+    &__content {
+      gap: 20px;
+    }
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__subtitle {
+      font-size: 12px;
+    }
+
+    &__icon {
+      width: 100px !important;
+      height: 90px !important;
+    }
+
+    &__actions {
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+  }
+}
 </style>
