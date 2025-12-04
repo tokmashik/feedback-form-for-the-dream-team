@@ -74,6 +74,7 @@ const resetForm = () => {
 
     &__actions {
       display: flex;
+      width: 100%;
       gap: 28px;
     }
 
